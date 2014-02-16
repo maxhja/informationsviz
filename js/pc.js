@@ -69,10 +69,6 @@ function pc(){
         var means = meanOfbranch(data);
         data = means;
         console.log(data);
-        x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
-            return d != "Name" && [(y[d] = d3.scale.linear() 
-
-       infoGrid1.addGrid(data);
 
         x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
             return d !=  mrParser(d) && [(y[d] = d3.scale.linear() //Remove Country
