@@ -54,7 +54,7 @@ function infoGrid() {
        
     }
      
-     //console.log(grid);	 
+     console.log(grid);	 
 
     function addGrid2(){
 
