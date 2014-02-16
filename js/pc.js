@@ -63,7 +63,7 @@ function pc(){
 
         self.data = data;
 
-<<<<<<< HEAD
+
         infoGrid1.addGrid(data);
         console.log(data);
         var means = meanOfbranch(data);
@@ -72,25 +72,17 @@ function pc(){
         x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
             return d != "Name" && [(y[d] = d3.scale.linear() 
 
-
-=======
->>>>>>> 95588cd97310457ef34ab7948f45a21ffb7f7e97
-       
        infoGrid1.addGrid(data);
 
         x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
             return d !=  mrParser(d) && [(y[d] = d3.scale.linear() //Remove Country
-<<<<<<< HEAD
 
-=======
->>>>>>> 95588cd97310457ef34ab7948f45a21ffb7f7e97
                 .domain(d3.extent(self.data, function(p) { 
                     return +p[d]; }))
                 .range([height, 0]))];
         }));
 
 
-<<<<<<< HEAD
         self.data = data;
         //console.log(data);
         //var means = meanOfbranch(data);
@@ -98,10 +90,6 @@ function pc(){
        //self.data = means;
 
       //  data = means;
-
-=======
->>>>>>> 95588cd97310457ef34ab7948f45a21ffb7f7e97
-
 
         function mrParser(d){
             var l = dimensionsOfStock.length;
@@ -122,10 +110,6 @@ function pc(){
             
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 95588cd97310457ef34ab7948f45a21ffb7f7e97
         draw();
     });
 
