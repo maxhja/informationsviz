@@ -63,7 +63,7 @@ function pc(){
     loadData(value);
 
     function loadData(value) {
-        
+        console.log(value);
         
 
       d3.csv("data/svenska_aktier2.csv", function(data) {
@@ -74,8 +74,6 @@ function pc(){
         infoGrid1.addGrid(data);
        
         var means = meanOfbranch(data);
-
-        data = means;
 
         if(value == "mean"){
             data = means;
