@@ -61,24 +61,6 @@ function pc(){
     //Load data med en Ny function som sedan ska anropas på "on click"
     var value = "mean";
     loadData(value);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-
-    function loadData(value) {
-        
-        
-
-      d3.csv("data/svenska_aktier2.csv", function(data) {
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
-
-    function loadData(value) {
-        
-        
-
-      d3.csv("data/svenska_aktier2.csv", function(data) {
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
 
     function loadData(value) {
         
@@ -92,37 +74,15 @@ function pc(){
         infoGrid1.addGrid(data);
        
         var means = meanOfbranch(data);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         data = means;
-        
-=======
-=======
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
-=======
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+
         if(value == "mean"){
             data = means;
         }
    
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-        
-       // console.log(data);
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
-=======
 
-        
-       // console.log(data);
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
-
-        
-       // console.log(data);
-
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
         x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
             return d !=  mrParser(d) && [(y[d] = d3.scale.linear() //Remove Country
 
@@ -148,18 +108,7 @@ function pc(){
                  if(d != dimensionsOfStock[i]){
                 }
                 else {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                  
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
-=======
-                  
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
-=======
-                  
->>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+
                     return d;
                 }
             }
