@@ -58,8 +58,15 @@ function pc(){
         .append("svg:g")
         .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
-    //Load data
-    d3.csv("data/svenska_aktier2.csv", function(data) {
+    //Load data med en Ny function som sedan ska anropas på "on click"
+    var value = "mean";
+    loadData(value);
+
+    function loadData(value) {
+        
+        
+
+      d3.csv("data/svenska_aktier2.csv", function(data) {
 
         self.data = data;
 
@@ -67,8 +74,13 @@ function pc(){
         infoGrid1.addGrid(data);
         console.log(data);
         var means = meanOfbranch(data);
-        data = means;
-        console.log(data);
+        if(value == "mean"){
+            data = means;
+        }
+   
+
+        
+       // console.log(data);
 
         x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
             return d !=  mrParser(d) && [(y[d] = d3.scale.linear() //Remove Country
@@ -97,7 +109,7 @@ function pc(){
                 
                 }
                 else {
-                    console.log(d);
+                  
                     return d;
                 }
                     
@@ -107,8 +119,8 @@ function pc(){
         }
 
         draw();
-    });
-
+        });
+      }
     function draw(){
 
         //adds all the stock
@@ -168,7 +180,9 @@ function pc(){
                                     })
             .on("click", function(d){
                 //selFeature(d);
-                console.log(d);
+                var mean = "data";
+              
+                loadData(mean);
                 //addToGrid(d);
             });
 
@@ -237,7 +251,8 @@ function pc(){
 
         infoGrid1.addGrid(value);
 
-    }
+    };
+
     
     //method for selecting features of other components
     function selFeature(value){
@@ -245,4 +260,8 @@ function pc(){
         //...
     };
 
+    function changeData(value){
+
+
+    }
 }
