@@ -1,4 +1,5 @@
 function pc(){
+    
 
     var self = this; // for internal d3 functions
 
@@ -32,7 +33,6 @@ function pc(){
     
     //initialize tooltip
 
-   dimensionsOfStock;
     var tooltip = d3.select("#body").append("div")
                     .attr("class", "tooltip")
                     .style("opacity",0);
@@ -58,18 +58,71 @@ function pc(){
         .append("svg:g")
         .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
-    //Load data
-    d3.csv("data/svenska_aktier2.csv", function(data) {
+    //Load data med en Ny function som sedan ska anropas på "on click"
+    var value = "mean";
+    loadData(value);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+
+    function loadData(value) {
+        
+        
+
+      d3.csv("data/svenska_aktier2.csv", function(data) {
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+
+    function loadData(value) {
+        
+        
+
+      d3.csv("data/svenska_aktier2.csv", function(data) {
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+
+    function loadData(value) {
+        
+        
+
+      d3.csv("data/svenska_aktier2.csv", function(data) {
 
         self.data = data;
 
-
+         
         infoGrid1.addGrid(data);
-        console.log(data);
+       
         var means = meanOfbranch(data);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         data = means;
-        console.log(data);
+        
+=======
+=======
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+=======
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+        if(value == "mean"){
+            data = means;
+        }
+   
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+        
+       // console.log(data);
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+=======
+
+        
+       // console.log(data);
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+
+        
+       // console.log(data);
+
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
         x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
             return d !=  mrParser(d) && [(y[d] = d3.scale.linear() //Remove Country
 
@@ -93,22 +146,29 @@ function pc(){
             
             for(i=0; i<l;i++){
                  if(d != dimensionsOfStock[i]){
-
-                
                 }
                 else {
-                    console.log(d);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                  
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+=======
+                  
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
+=======
+                  
+>>>>>>> bb6c285755a928f705fbaf6f63fcc0450b0e5d88
                     return d;
                 }
-                    
             }
-
             
         }
 
         draw();
-    });
-
+        });
+      }
     function draw(){
 
         //adds all the stock
@@ -168,7 +228,9 @@ function pc(){
                                     })
             .on("click", function(d){
                 //selFeature(d);
-                console.log(d);
+                var mean = "data";
+              
+                loadData(mean);
                 //addToGrid(d);
             });
 
@@ -204,10 +266,7 @@ function pc(){
 
     // Returns the path for a given data point.
     function path(d) {
-
-
         return line(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
-
 
     }
 
@@ -237,7 +296,8 @@ function pc(){
 
         infoGrid1.addGrid(value);
 
-    }
+    };
+
     
     //method for selecting features of other components
     function selFeature(value){
@@ -245,4 +305,8 @@ function pc(){
         //...
     };
 
+    function changeData(value){
+
+
+    }
 }

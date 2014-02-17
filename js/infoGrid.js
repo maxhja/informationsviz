@@ -1,11 +1,9 @@
 function infoGrid() {
 
 	var self = this; // for internal d3 functions
-	
-  
+  self.grid=null;	
+ 
   //create the grid with slickgrid
-
-  var grid;
 
   var columns = [
     {id: "stock", name: "Stock Name", field: "Stock", width: 120},
@@ -15,7 +13,6 @@ function infoGrid() {
     {id: "dy", name: "Dividend Yield", field: "dy"},
     {id: "beta", name: "Beta", field: "beta"},
     
-   
 
   ];
 
@@ -33,10 +30,7 @@ function infoGrid() {
 
     this.addGrid = function(data){
 
-    
-
-       var dataPicked = [];
-     
+          var dataPicked = [];
 	        var length = data.length;
 
 	        for (var i = 0; i < length; i++) {
@@ -49,18 +43,16 @@ function infoGrid() {
               beta: data[i]["Beta"]
             };
         }
-        grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
+        self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
+        self.grid.onClick.subscribe(function(e, args) {
+            console.log(data[args.row]);
+        // or dataView.getItem(args.row);
+        });
 
-       
+            
     }
      
-     console.log(grid);	 
-
-    function addGrid2(){
-
-    }
-   
-
+    
     //method for selecting the pololyne from other components	
     this.selectLine = function(value){
         
