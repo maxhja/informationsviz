@@ -2,7 +2,8 @@ function pc(){
     
 
     var self = this; // for internal d3 functions
-
+    
+    self.means =null;
     var pcDiv = $("#pc");
 
     var margin = [30, 10, 10, 10],
@@ -25,7 +26,7 @@ function pc(){
                             "Beta adjustment factor","Coeff of variation - Op Income","Coeff of variation - Net Income",
                             "Average 10-year EBIT","Average 10-yr Net Income", "EBITDA", "Cash/ Firm Value", "Stock price (Dec 31, 2012)in US$",
                             "Return on Capital (ROC or ROIC)", "Net Profit Margin", "Pre-tax Operating Margin","Total Debt", "Cash", "Correlation with market",
-                            "Return on Equity", "Trailing Revenues"]
+                            "Return on Equity", "Trailing Revenues", "Size of Branch"]
 
     
     //initialize color scale
@@ -33,9 +34,9 @@ function pc(){
     
     //initialize tooltip
 
-    var tooltip = d3.select("#body").append("div")
+    var tooltip = d3.select("body").append("div")
                     .attr("class", "tooltip")
-                    .style("opacity",0);
+                    .style("opacity", 0);
 
   
 
@@ -63,40 +64,32 @@ function pc(){
     loadData(value);
 
     function loadData(value) {
-        console.log(value);
-        
-
-      d3.csv("data/svenska_aktier2.csv", function(data) {
-
-        self.data = data;
-
-         
-        infoGrid1.addGrid(data);
        
+      d3.csv("data/svenska_aktier2.csv", function(data) {
         var means = meanOfbranch(data);
-
+        self.data = data;
+        self.means = means;
+       
+        //console.log(self.means);
         if(value == "mean"){
-            data = means;
+
+            infoGrid1.addGrid(means);
+            setScale(self.means)
         }
-   
+        else{
+            infoGrid1.addGrid(data);
+            setScale(self.data)
+        }
 
-
-        x.domain(dimensions = d3.keys(self.data[0]).filter(function(d) {
+        function setScale(data1){
+            x.domain(dimensions = d3.keys(data1[0]).filter(function(d) {
             return d !=  mrParser(d) && [(y[d] = d3.scale.linear() //Remove Country
-
-                .domain(d3.extent(self.data, function(p) { 
+                .domain(d3.extent(data1, function(p) { 
                     return +p[d]; }))
                 .range([height, 0]))];
-        }));
+            }));
 
-
-        self.data = data;
-        //console.log(data);
-        //var means = meanOfbranch(data);
-       // console.log(means);
-       //self.data = means;
-
-      //  data = means;
+        }
 
         function mrParser(d){
             var l = dimensionsOfStock.length;
@@ -105,42 +98,46 @@ function pc(){
             for(i=0; i<l;i++){
                  if(d != dimensionsOfStock[i]){
                 }
-                else {
-
+                else 
                     return d;
-                }
-            }
-            
+            } 
         }
-
-        draw();
+        draw(value);
         });
       }
-    function draw(){
+    function draw(value){
 
         //adds all the stock
 
         cc = {};
         var color = d3.scale.category20c();
 
+        var dataSet= null;
 
-   //     self.data.forEach(function(d){
-    //        cc[d["Tick"]] = color(d["Tick"]);
+        if(value =="mean"){
+           // console.log(self.means);
+            self.means.forEach(function(d){
+                cc[d["Industry Group"]] = color(d["Industry Group"]);
+            });
 
-        self.data.forEach(function(d){
-            cc[d["Company Name"]] = color(d["Company Name"]);
-        });
+            dataSet = self.means;
+        }
+        else{
+            self.data.forEach(function(d){
+                cc[d["Company Name"]] = color(d["Company Name"]);
+                dataSet = self.data;
+            });
 
-
+        }
         // Add grey background lines for context.
         background = svg.append("svg:g")
             .attr("class", "background")
             .selectAll("path")
-            .data(self.data)
+            .data(dataSet)
             .enter().append("svg:path")
             .attr("d", path)
             .style("stroke", function(p){
-                return color(p["Company Name"]);
+                return color(p["Industry Group"]);
      
             })
             //add the data and append the path 
@@ -152,13 +149,19 @@ function pc(){
         foreground = svg.append("svg:g")
             .attr("class", "foreground")
             .selectAll("path")
-            .data(self.data)
+            .data(dataSet)
             .enter().append("svg:path")
             .attr("d", path)
-            .style("stroke", function(p){
+            .attr("stroke-width", function(d){
 
-                return color(p["Company Name"]);   
+
+                return (d["Size of Branch"]/5);
             })
+            .style("stroke",function(p){
+
+                return color(p["Industry Group"]);   
+            })
+
             .on("mouseout", function(d){
                 tooltip.transition()
                 .duration(500)
@@ -166,17 +169,18 @@ function pc(){
 
                                   })
             .on("mouseover", function(d){
-
+                console.log(d);
                 tooltip.transition()
-                .duration(500)  
-                .style("opacity", .9)
+               .duration(200)
+               .style("opacity", 1);
+                tooltip.html(d["Industry Group"])
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
 
-            
                                     })
             .on("click", function(d){
                 //selFeature(d);
-                var mean = "data";
-              
+                var mean = "data";              
                 loadData(mean);
                 //addToGrid(d);
             });
@@ -207,8 +211,6 @@ function pc(){
             .selectAll("rect")
             .attr("x", -8)
             .attr("width", 16)
-          
-
     }
 
     // Returns the path for a given data point.

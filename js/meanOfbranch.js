@@ -1,36 +1,60 @@
 function meanOfbranch(data) {
-
-   	var mean = {};
+   
    	var meanArray = [];
    	var counter = 0;
-   	mean["Name"] = "Medel";
 
+    var industryGroups = new Object();
 
+    var industryGroupMean = {}; 
+   
+    
 
+    //add all uniqe industry group into a "map". 
     for (var i = 0; i < data.length; i++) {
-      data[i];
+      if(isNaN(industryGroups[data[i]["Industry Group"]])){
+        industryGroups[data[i]["Industry Group"]]= 1;
+      }
+    
+       industryGroups[data[i]["Industry Group"]]= 1+industryGroups[data[i]["Industry Group"]];
+        
     };
+
   
+   for(var industryGroup in industryGroups){
+     
+      var sizeOfBranch=0;
+      var mean = {};
+      mean["Industry Group"] = industryGroup;
+      mean["Size of Branch"] =0;
+        
+    		for(var koordinat = 1; koordinat < d3.keys(data[0]).length; koordinat++) {
+                    counter = 1;
+                    calc = 0;
 
+                    for(var j=0; j<data.length;j++){
+                            
+                            var tmpData = data[j][d3.keys(data[0])[koordinat]];
 
-		for(var koordinat = 1; koordinat < d3.keys(data[0]).length; koordinat++) {
-                counter = 0;
-                calc = 0;
-                for(var j=0; j<data.length;j++){
-                        counter++;
-                        var tmpData = +data[j][d3.keys(data[0])[koordinat]];
-                        if(!isNaN(tmpData)){
-                        	calc += tmpData;
-                        }    	
-                    
-                }
-                var temp = d3.keys(data[0])[koordinat];
-               // console.log(temp);
-                mean[temp] = '' + calc/counter + '';
-            }  
-            meanArray.push(mean);
+                            if(!isNaN(tmpData) && data[j]["Industry Group"]==industryGroup){
+                              tmpData;
+                              counter++;
+                            	calc += parseFloat(tmpData);
+                            }    	
+                    }
 
-            return meanArray;
+                    var temp = d3.keys(data[0])[koordinat];
 
+                    if(calc>0){
+                       mean[temp] = '' + calc/counter + '';
+                       mean["Size of Branch"] = counter;
+                      
+                     }
+
+        }  
+                
+                meanArray.push(mean);      
+  }
+    
+  return meanArray;
 
 };
