@@ -85,12 +85,6 @@ function pc(){
      
     //Load data med en Ny function som sedan ska anropas på "on click"
 
-    var value = "mean";
-    loadData(value);
-
-    function loadData(value) {
-
- 
 
 
       d3.csv("data/svenska_aktier2.csv", function(data) {
