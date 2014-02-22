@@ -72,7 +72,7 @@ function pc(){
 
     x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {};
-        
+            
 
     svg = d3.select("#pc").append("svg:svg")
         .attr("width", width + margin[1] + margin[3])
@@ -217,7 +217,7 @@ function pc(){
                  var sortedData = sortData(d, tempData);            
                  addToGrid(sortedData);
                 // draw();
-                //loadData(mean);
+                loadData(mean);
                 
             });
 
