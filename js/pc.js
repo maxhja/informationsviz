@@ -1,6 +1,5 @@
 function pc(){
     
-
     var self = this; // for internal d3 functions
 
     self.means =null;
@@ -12,10 +11,9 @@ function pc(){
     var div;
     var tooltip;
     var svg;
-    var line = d3.svg.line(),
-        axis = d3.svg.axis().orient(),
-        background,
-        foreground;
+    var line;
+    var background;
+    var foreground;
 
     var pcDiv = $("#pc");
 
@@ -43,15 +41,28 @@ function pc(){
     
     //initialize tooltip
 
+<<<<<<< HEAD
+=======
+
+ var value = "mean";
+    loadData(value);        
+    function loadData(value) {  
+    d3.select("svg")
+       .remove();
+
+
+>>>>>>> 29b291ac0ae86e667e3e8dee89c482723a8160e9
     tooltip = d3.select("body").append("div")
                     .attr("class", "tooltip")
                     .style("opacity", 0);
 
-    div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);   
+   
 
-  
+   
+
+      div = d3.select("body").append("div")   
+        .attr("class", "tooltip")               
+        .style("opacity", 0);  
 
      line = d3.svg.line(),
         axis = d3.svg.axis().orient("left"),
@@ -61,6 +72,7 @@ function pc(){
 
     x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {};
+<<<<<<< HEAD
         
 
      
@@ -76,11 +88,19 @@ function pc(){
         var value = "mean";
         loadData(value, data); 
     
+=======
+            
+>>>>>>> 29b291ac0ae86e667e3e8dee89c482723a8160e9
 
     });  
      
 
+<<<<<<< HEAD
     function loadData(value, sortedData) {
+=======
+  
+ 
+>>>>>>> 29b291ac0ae86e667e3e8dee89c482723a8160e9
 
         
 
@@ -114,7 +134,6 @@ function pc(){
                     return +p[d]; }))
                 .range([height, 0]))];
             }));
-
         }
 
         draw(value);
@@ -219,8 +238,13 @@ function pc(){
                  //get all objects within the industry group
                  var sortedData = sortData(d, tempData);            
                  addToGrid(sortedData);
+<<<<<<< HEAD
                 
                  loadData(mean, sortedData);
+=======
+                // draw();
+                loadData(mean);
+>>>>>>> 29b291ac0ae86e667e3e8dee89c482723a8160e9
                 
             });
 
@@ -287,7 +311,7 @@ function pc(){
     
     //method for selecting features of other components
     function selFeature(value){
-        console.log(value);
+     //   console.log(value);
         //...
     };
 
