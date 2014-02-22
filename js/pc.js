@@ -1,9 +1,8 @@
 function pc(){
     
 
-  
+    var self = this; // for internal d3 functions
 
-    
     self.means =null;
 
     var x ;
@@ -48,8 +47,7 @@ function pc(){
 
 
 
-    tooltip = d3.select("#body").append("div")
-
+    tooltip = d3.select("body").append("div")
                     .attr("class", "tooltip")
                     .style("opacity", 0);
 
@@ -73,6 +71,7 @@ function pc(){
 
      var value = "mean";
     loadData(value);        
+
     function loadData(value) {
 
  
@@ -90,11 +89,8 @@ function pc(){
       d3.csv("data/svenska_aktier2.csv", function(data) {
         var means = meanOfbranch(data);
         self.data = data;
-
+     
         self.means = means;
-       
-        //console.log(self.means);
-
 
         if(value == "mean"){
         var means = meanOfbranch(data);
@@ -129,7 +125,9 @@ function pc(){
                     return d;
             } 
         }
+
         draw(value);
+
         });
 
       }
@@ -151,6 +149,9 @@ function pc(){
             });
 
             dataSet = self.means;
+        }
+        else if(value=="middle"){
+
         }
         else{
             self.data.forEach(function(d){
@@ -199,7 +200,7 @@ function pc(){
 
                                   })
             .on("mouseover", function(d){
-                console.log(d);
+               // console.log(d);
                 tooltip.transition()
                .duration(200)
                .style("opacity", 1);
@@ -210,12 +211,15 @@ function pc(){
                                     })
             .on("click", function(d){
                 //selFeature(d);
-                var mean = "data";              
-                loadData(mean);
-                //addToGrid(d);
+                var tempData = clone(self.data);
+                var mean = "data";  
+                 //get all objects within the industry group
+                 var sortedData = sortData(d, tempData);            
+                 addToGrid(sortedData);
+                // draw();
+                //loadData(mean);
+                
             });
-
-        
 
         // Add a group element for each dimension.
         var g = svg.selectAll(".dimension")
