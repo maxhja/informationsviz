@@ -1,6 +1,7 @@
 function pc(){
     
 
+<<<<<<< HEAD
 
 
 
@@ -11,6 +12,10 @@ function pc(){
 
 
 
+=======
+    var self = this; // for internal d3 functions
+
+>>>>>>> 08883122c958c5a2bcb00f57b7480f8e9289651e
     self.means =null;
 
     var x ;
@@ -83,6 +88,15 @@ function pc(){
         y = {};
         
 
+<<<<<<< HEAD
+=======
+     var value = "mean";
+    loadData(value);        
+
+    function loadData(value) {
+
+ 
+>>>>>>> 08883122c958c5a2bcb00f57b7480f8e9289651e
 
     svg = d3.select("#pc").append("svg:svg")
         .attr("width", width + margin[1] + margin[3])
