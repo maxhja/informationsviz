@@ -47,11 +47,6 @@ function pc(){
                     .attr("class", "tooltip")
                     .style("opacity", 0);
 
-    div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);   
-
-  
 
      line = d3.svg.line(),
         axis = d3.svg.axis().orient("left"),
@@ -63,12 +58,8 @@ function pc(){
         y = {};
         
 
-     
-    
- 
     d3.csv("data/svenska_aktier2.csv", function(data) {
         
-
         means = meanOfbranch(data);
         data =data;
         self.data = data;
@@ -82,7 +73,9 @@ function pc(){
 
     function loadData(value, sortedData) {
 
-        
+        d3.select("svg")
+       .remove();
+
 
         svg = d3.select("#pc").append("svg:svg")
             .attr("width", width + margin[1] + margin[3])
@@ -121,8 +114,6 @@ function pc(){
       }
 
       //Slut på loaddata
-
-
       function getDimension(d){
             var l = dimensionsOfStock.length;
             var i;
@@ -137,7 +128,6 @@ function pc(){
     function draw(value){
 
         //adds all the stock
-
         cc = {};
         var color = d3.scale.category20c();
 
