@@ -4,7 +4,6 @@ function meanOfbranch(data) {
    	var counter = 0;
 
     var industryGroups = new Object();
-
     var industryGroupMean = {}; 
 
     var companys = [];
@@ -20,7 +19,6 @@ function meanOfbranch(data) {
       }
     
        industryGroups[data[i]["Industry Group"]]= 1+industryGroups[data[i]["Industry Group"]];
-
 
     };
 
@@ -38,7 +36,7 @@ function meanOfbranch(data) {
                     calc = 0;
                     var companyName ="";
                     for(var j=0; j<data.length;j++){
-                        
+                      
                             var tmpData = data[j][d3.keys(data[0])[koordinat]];
 
                             if(!isNaN(tmpData) && data[j]["Industry Group"]==industryGroup){
