@@ -1,21 +1,7 @@
 function pc(){
     
-
-<<<<<<< HEAD
-
-
-
-
     var self = this; // for internal d3 functions
 
-
-
-
-
-=======
-    var self = this; // for internal d3 functions
-
->>>>>>> 08883122c958c5a2bcb00f57b7480f8e9289651e
     self.means =null;
 
     var x ;
@@ -87,16 +73,6 @@ function pc(){
     x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {};
         
-
-<<<<<<< HEAD
-=======
-     var value = "mean";
-    loadData(value);        
-
-    function loadData(value) {
-
- 
->>>>>>> 08883122c958c5a2bcb00f57b7480f8e9289651e
 
     svg = d3.select("#pc").append("svg:svg")
         .attr("width", width + margin[1] + margin[3])
