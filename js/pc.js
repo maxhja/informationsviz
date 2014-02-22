@@ -2,6 +2,14 @@ function pc(){
     
 
     var self = this; // for internal d3 functions
+    var x ;
+    var div;
+    var tooltip;
+    var svg;
+    var line = d3.svg.line(),
+        axis = d3.svg.axis().orient(),
+        background,
+        foreground;
 
     var pcDiv = $("#pc");
 
@@ -33,38 +41,45 @@ function pc(){
     
     //initialize tooltip
 
-    var tooltip = d3.select("#body").append("div")
+ 
+
+
+    tooltip = d3.select("#body").append("div")
                     .attr("class", "tooltip")
                     .style("opacity",0);
 
+    div = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);   
+
   
 
-    var div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);
- //...
-    var x = d3.scale.ordinal().rangePoints([0, width], 1),
-        y = {};
-        
-
-    var line = d3.svg.line(),
+     line = d3.svg.line(),
         axis = d3.svg.axis().orient("left"),
         background,
         foreground;
 
-    var svg = d3.select("#pc").append("svg:svg")
+
+
+
+    x = d3.scale.ordinal().rangePoints([0, width], 1),
+        y = {};
+        
+
+     var value = "mean";
+    loadData(value);        
+    function loadData(value) {
+
+ 
+
+    svg = d3.select("#pc").append("svg:svg")
         .attr("width", width + margin[1] + margin[3])
         .attr("height", height + margin[0] + margin[2])
         .append("svg:g")
         .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
-
+     
     //Load data med en Ny function som sedan ska anropas på "on click"
-    var value = "mean";
-    loadData(value);
-
-    function loadData(value) {
-        console.log(value);
-        
+ 
 
       d3.csv("data/svenska_aktier2.csv", function(data) {
 
@@ -72,10 +87,8 @@ function pc(){
 
          
         infoGrid1.addGrid(data);
-       
-        var means = meanOfbranch(data);
-
         if(value == "mean"){
+        var means = meanOfbranch(data);
             data = means;
         }
    
@@ -115,7 +128,7 @@ function pc(){
 
         draw();
         });
-      }
+    }
     function draw(){
 
         //adds all the stock
