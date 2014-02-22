@@ -11,16 +11,14 @@ function meanOfbranch(data) {
 
     //add all uniqe industry group into a "map". 
     for (var i = 0; i < data.length; i++) {
-<<<<<<< HEAD
+
       if(isNaN(industryGroups[data[i]["Industry Group"]])){
         industryGroups[data[i]["Industry Group"]]= 1;
       }
     
        industryGroups[data[i]["Industry Group"]]= 1+industryGroups[data[i]["Industry Group"]];
-        
-=======
-      
->>>>>>> maxBranch
+
+
     };
 
   
