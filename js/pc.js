@@ -184,12 +184,9 @@ function pc(){
             .enter().append("svg:path")
             .attr("d", path)
             .attr("stroke-width", function(d){
-
-
                 return (d["Size of Branch"]/5);
             })
             .style("stroke",function(p){
-
                 return color(p["Industry Group"]);   
             })
 
@@ -214,7 +211,8 @@ function pc(){
                 var tempData = clone(self.data);
                 var mean = "data";  
                  //get all objects within the industry group
-                 var sortedData = sortData(d, tempData);            
+                 var sortedData = sortData(d, tempData);     
+
                  addToGrid(sortedData);
                 // draw();
                 loadData(mean);
@@ -255,6 +253,7 @@ function pc(){
 
     // Handles a brush event, toggling the display of foreground lines.
     function brush() {
+        var array = [];
         var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
             extents = actives.map(function(p) { return y[p].brush.extent(); });
             foreground.style("display", function(d) {
@@ -262,7 +261,10 @@ function pc(){
             return actives.every(function(p, i) {
                 if(extents[i][0] <= d[p] && d[p] <= extents[i][1])
                 {
-                    //addToGrid(d);
+                    
+                    array.push(d);
+                    addToGrid(array);
+                   // console.log(d);
                 }
                 return extents[i][0] <= d[p] && d[p] <= extents[i][1];
             }) ? null : "none";
