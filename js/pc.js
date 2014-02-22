@@ -43,6 +43,7 @@ function pc(){
     
     //initialize tooltip
 
+
         
 
     d3.csv("data/svenska_aktier2.csv", function(data) {
@@ -76,6 +77,7 @@ function pc(){
 
     x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {};
+
 
         svg = d3.select("#pc").append("svg:svg")
             .attr("width", width + margin[1] + margin[3])
@@ -184,12 +186,9 @@ function pc(){
             .enter().append("svg:path")
             .attr("d", path)
             .attr("stroke-width", function(d){
-
-
                 return (d["Size of Branch"]/5);
             })
             .style("stroke",function(p){
-
                 return color(p["Industry Group"]);   
             })
 
@@ -214,8 +213,10 @@ function pc(){
                 var tempData = clone(self.data);
                 var mean = "data";  
                  //get all objects within the industry group
-                 var sortedData = sortData(d, tempData);            
+                 var sortedData = sortData(d, tempData);     
+
                  addToGrid(sortedData);
+
                  loadData(mean, sortedData);
                 
             });
@@ -254,6 +255,7 @@ function pc(){
 
     // Handles a brush event, toggling the display of foreground lines.
     function brush() {
+        var array = [];
         var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
             extents = actives.map(function(p) { return y[p].brush.extent(); });
             foreground.style("display", function(d) {
@@ -261,7 +263,10 @@ function pc(){
             return actives.every(function(p, i) {
                 if(extents[i][0] <= d[p] && d[p] <= extents[i][1])
                 {
-                    //addToGrid(d);
+                    
+                    array.push(d);
+                    addToGrid(array);
+                   // console.log(d);
                 }
                 return extents[i][0] <= d[p] && d[p] <= extents[i][1];
             }) ? null : "none";
