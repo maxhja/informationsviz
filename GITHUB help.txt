@@ -1,7 +1,0 @@
-GITHUB
-git add -A // Add all files
-git commit -m "message" // commit all added files
-git push // om det finns en nyare verison på github måste man pulla och resolva conflicts 
-git pull 
-konflikter // // tar bort i koden konflikter.
-kör om. 
