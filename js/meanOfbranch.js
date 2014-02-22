@@ -6,6 +6,7 @@ function meanOfbranch(data) {
     var industryGroups = new Object();
 
     var industryGroupMean = {}; 
+
    
     
 
@@ -28,18 +29,23 @@ function meanOfbranch(data) {
       var mean = {};
       mean["Industry Group"] = industryGroup;
       mean["Size of Branch"] =0;
+      mean["Company Name"]="";
         
     		for(var koordinat = 1; koordinat < d3.keys(data[0]).length; koordinat++) {
                     counter = 1;
                     calc = 0;
 
+
                     for(var j=0; j<data.length;j++){
+                            var companyName ="";
                             
                             var tmpData = data[j][d3.keys(data[0])[koordinat]];
 
                             if(!isNaN(tmpData) && data[j]["Industry Group"]==industryGroup){
                               tmpData;
+                              companyName+=data[j]["Company Name"];
                               counter++;
+
                             	calc += parseFloat(tmpData);
                             }    	
                     }
@@ -49,6 +55,8 @@ function meanOfbranch(data) {
                     if(calc>0){
                        mean[temp] = '' + calc/counter + '';
                        mean["Size of Branch"] = counter;
+                       mean["Company Name"] =companyName;
+
                       
                      }
 
