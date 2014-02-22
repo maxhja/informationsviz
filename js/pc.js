@@ -1,19 +1,25 @@
 function pc(){
     
 
-  
 
-    
+
+
+
+    var self = this; // for internal d3 functions
+
+
+
+
+
     self.means =null;
 
     var x ;
     var div;
     var tooltip;
     var svg;
-    var line = d3.svg.line(),
-        axis = d3.svg.axis().orient(),
-        background,
-        foreground;
+    var line;
+    var background;
+    var foreground;
 
     var pcDiv = $("#pc");
 
@@ -46,18 +52,24 @@ function pc(){
     //initialize tooltip
 
 
+ var value = "mean";
+    loadData(value);        
+    function loadData(value) {  
+    d3.select("svg")
+       .remove();
 
 
-    tooltip = d3.select("#body").append("div")
-
+    tooltip = d3.select("body").append("div")
                     .attr("class", "tooltip")
                     .style("opacity", 0);
 
-    div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);   
+   
 
-  
+   
+
+      div = d3.select("body").append("div")   
+        .attr("class", "tooltip")               
+        .style("opacity", 0);  
 
      line = d3.svg.line(),
         axis = d3.svg.axis().orient("left"),
@@ -71,11 +83,6 @@ function pc(){
         y = {};
         
 
-     var value = "mean";
-    loadData(value);        
-    function loadData(value) {
-
- 
 
     svg = d3.select("#pc").append("svg:svg")
         .attr("width", width + margin[1] + margin[3])
@@ -85,16 +92,15 @@ function pc(){
      
     //Load data med en Ny function som sedan ska anropas på "on click"
 
+  
+ 
 
 
       d3.csv("data/svenska_aktier2.csv", function(data) {
         var means = meanOfbranch(data);
         self.data = data;
-
+     
         self.means = means;
-       
-        //console.log(self.means);
-
 
         if(value == "mean"){
         var means = meanOfbranch(data);
@@ -129,7 +135,9 @@ function pc(){
                     return d;
             } 
         }
+
         draw(value);
+
         });
 
       }
@@ -151,6 +159,9 @@ function pc(){
             });
 
             dataSet = self.means;
+        }
+        else if(value=="middle"){
+
         }
         else{
             self.data.forEach(function(d){
@@ -199,7 +210,7 @@ function pc(){
 
                                   })
             .on("mouseover", function(d){
-                console.log(d);
+               // console.log(d);
                 tooltip.transition()
                .duration(200)
                .style("opacity", 1);
@@ -210,12 +221,15 @@ function pc(){
                                     })
             .on("click", function(d){
                 //selFeature(d);
-                var mean = "data";              
-                loadData(mean);
-                //addToGrid(d);
+                var tempData = clone(self.data);
+                var mean = "data";  
+                 //get all objects within the industry group
+                 var sortedData = sortData(d, tempData);            
+                 addToGrid(sortedData);
+                // draw();
+                //loadData(mean);
+                
             });
-
-        
 
         // Add a group element for each dimension.
         var g = svg.selectAll(".dimension")
@@ -280,7 +294,7 @@ function pc(){
     
     //method for selecting features of other components
     function selFeature(value){
-        console.log(value);
+     //   console.log(value);
         //...
     };
 
