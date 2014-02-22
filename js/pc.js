@@ -43,25 +43,12 @@ function pc(){
     
     //initialize tooltip
 
-    tooltip = d3.select("body").append("div")
-                    .attr("class", "tooltip")
-                    .style("opacity", 0);
-
-
-     line = d3.svg.line(),
-        axis = d3.svg.axis().orient("left"),
-        background,
-        foreground;
-
-
-    x = d3.scale.ordinal().rangePoints([0, width], 1),
-        y = {};
         
 
     d3.csv("data/svenska_aktier2.csv", function(data) {
         
         means = meanOfbranch(data);
-        data =data;
+        data = data;
         self.data = data;
         self.means = means;
         var value = "mean";
@@ -76,6 +63,19 @@ function pc(){
         d3.select("svg")
        .remove();
 
+     tooltip = d3.select("body").append("div")
+                    .attr("class", "tooltip")
+                    .style("opacity", 0);
+
+
+     line = d3.svg.line(),
+        axis = d3.svg.axis().orient("left"),
+        background,
+        foreground;
+
+
+    x = d3.scale.ordinal().rangePoints([0, width], 1),
+        y = {};
 
         svg = d3.select("#pc").append("svg:svg")
             .attr("width", width + margin[1] + margin[3])
@@ -85,13 +85,17 @@ function pc(){
      
          //Load data med en Ny function som sedan ska anropas på "on click"
         if(value == "mean"){
+
         var means = meanOfbranch(sortedData);
             infoGrid1.addGrid(means);
             setScale(self.means)
         }
         else if("data"==value){
-            self.sortedData = sortedData;
+          // console.log(value);
+            
+            self.sortedData = sortedData;   
             infoGrid1.addGrid(sortedData);
+            console.log(self.sortedData);
             setScale(self.sortedData)
         }
         else{
@@ -101,6 +105,7 @@ function pc(){
         }
 
         function setScale(data1){
+            
             x.domain(dimensions = d3.keys(data1[0]).filter(function(d) {
             return d !=  getDimension(d) && [(y[d] = d3.scale.linear() //Remove Country
                 .domain(d3.extent(data1, function(p) { 
@@ -135,23 +140,25 @@ function pc(){
 
         if(value =="mean"){
             self.means.forEach(function(d){
-                cc[d["Industry Group"]] = color(d["Industry Group"]);
+                    cc[d["Industry Group"]] = color(d["Industry Group"]);
             });
 
             dataSet = self.means;
         }
         else if(value=="data"){
             self.sortedData.forEach(function(d){
-                cc[d["Company Name"]] = color(d["Company Name"]);
-                dataSet = self.data;
+                    cc[d["Company Name"]] = color(d["Company Name"]);
+                   
             });
+             dataSet = self.sortedData;
 
         }
         else{
             self.data.forEach(function(d){
                 cc[d["Company Name"]] = color(d["Company Name"]);
-                dataSet = self.data;
+                
             });
+            dataSet = self.data;
 
         }
         // Add grey background lines for context.
@@ -209,7 +216,6 @@ function pc(){
                  //get all objects within the industry group
                  var sortedData = sortData(d, tempData);            
                  addToGrid(sortedData);
-                
                  loadData(mean, sortedData);
                 
             });
@@ -274,7 +280,6 @@ function pc(){
 
     };
 
-    
     //method for selecting features of other components
     function selFeature(value){
         console.log(value);
