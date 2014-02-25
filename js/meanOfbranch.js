@@ -8,9 +8,6 @@ function meanOfbranch(data) {
 
     var companys = [];
 
-   
-    
-
     //add all uniqe industry group into a "map". 
     for (var i = 0; i < data.length; i++) {
 
@@ -29,7 +26,7 @@ function meanOfbranch(data) {
       var mean = {};
       mean["Industry Group"] = industryGroup;
       mean["Size of Branch"] =0;
-      mean["Company Name"]="";
+     
         
     		for(var koordinat = 1; koordinat < d3.keys(data[0]).length; koordinat++) {
                     counter = 1;
@@ -41,7 +38,7 @@ function meanOfbranch(data) {
 
                             if(!isNaN(tmpData) && data[j]["Industry Group"]==industryGroup){
                               tmpData;
-                              companyName+=data[j]["Company Name"];
+                             
                               counter++;
                             	calc += parseFloat(tmpData);
                             }    	
@@ -52,7 +49,7 @@ function meanOfbranch(data) {
                     if(calc>0){
                        mean[temp] = '' + calc/counter + '';
                        mean["Size of Branch"] = counter;
-                       mean["Company Name"] =companyName;
+                      
                      }
         }  
                 

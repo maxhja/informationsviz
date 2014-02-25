@@ -28,17 +28,17 @@ function pc(){
                             "Book Debt to capital ratio","Market Debt to capital ratio","Book Debt to Equity Ratio",
                             "Market Debt to Equity ratio",
                             "Standard deviation in stock price","Interest coverage ratio","PEG","EV/EBIT","EV/EBITDA",
-                            "EV/Invested Capital","EV/Sales","Dividend Yield","Historical growth in Net Income - Last 3 years",
+                           "EV/Sales","Dividend Yield","Historical growth in Net Income - Last 3 years",
                             "Historical growth in Net Income - Last 5 years","Historical growth in Revenues - Last 3 years",
                             "Historical growth in Revenues - Last 5 years","Expected growth rate in EPS- Next 5 years","Expected growth in revenues - Next 2 years",
-                            "Return on Equity,Return on Capital (ROC or ROIC)","Net Profit Margin,Pre-tax Operating Margin","Effective Tax Rate",
+                            "Return on Equity,Return on Capital (ROC or ROIC)","Pre-tax Operating Margin","Effective Tax Rate",
                             "% held by institutions","Net Income","Trailing Net Income","Operating Income","Trailing Operating Income (adj for leases)",
                             "Revenues","Trailing Revenues,EBITDA","Trailing EBITDA","EBIT (1-t)","Net Debt issued (Debt issue - repaid)",
                             "Change in non-cash Working capital","Net Cap Ex","Reinvestment Rate","FCFF","FCFE","FCFE without debt","Book Value of Equity - 4 qtrs ago",
                             "Invested Capital - 4 qtre ago","Current Book Value of Equity","Current Invested Capital","Dividends","Modified 2-year beta","Modified 5-year beta",
                             "Beta adjustment factor","Coeff of variation - Op Income","Coeff of variation - Net Income",
                             "Average 10-year EBIT","Average 10-yr Net Income", "EBITDA", "Cash/ Firm Value", "Stock price (Dec 31, 2012)in US$",
-                            "Return on Capital (ROC or ROIC)", "Net Profit Margin", "Pre-tax Operating Margin","Total Debt", "Cash", "Correlation with market",
+                            "Return on Capital (ROC or ROIC)", "Net Profit Margin", "Pre-tax Operating Margin","Total Debt", "Cash",
                             "Return on Equity", "Trailing Revenues", "Size of Branch"]
     
     //initialize tooltip
@@ -137,6 +137,7 @@ function pc(){
         //adds all the stock
         cc = {};
         var color = d3.scale.category20c();
+        var setColorType ="";
 
         var dataSet= null;
 
@@ -144,6 +145,7 @@ function pc(){
             self.means.forEach(function(d){
                     cc[d["Industry Group"]] = color(d["Industry Group"]);
             });
+            setColorType = "Industry Group";
 
             dataSet = self.means;
         }
@@ -152,6 +154,7 @@ function pc(){
                     cc[d["Company Name"]] = color(d["Company Name"]);
                    
             });
+             setColorType = "Company Name";
              dataSet = self.sortedData;
 
         }
@@ -161,6 +164,7 @@ function pc(){
                 
             });
             dataSet = self.data;
+            setColorType = "Industry Group";
 
         }
         // Add grey background lines for context.
@@ -189,7 +193,7 @@ function pc(){
                 return (d["Size of Branch"]/5);
             })
             .style("stroke",function(p){
-                return color(p["Industry Group"]);   
+                return color(p[setColorType]);   
             })
 
             .on("mouseout", function(d){
@@ -203,9 +207,26 @@ function pc(){
                 tooltip.transition()
                .duration(200)
                .style("opacity", 1);
-                tooltip.html(d["Industry Group"])
+                tooltip.html(d[setColorType])
                .style("left", (d3.event.pageX + 5) + "px")
-               .style("top", (d3.event.pageY - 28) + "px");
+               .style("top", (d3.event.pageY -8) + "px");
+
+                if(d["Company Name"]!=null){
+                    var tempData = clone(self.data);
+                    //sort after company name
+                    console.log("sss");
+                    var sortedData = getCompany(d, tempData);     
+                    addToGrid(sortedData);
+
+
+                }
+                else{ // sort grid after industry group 
+                var tempData = clone(self.data);
+              
+                 //get all objects within the industry group
+                 var sortedData = sortData(d, tempData);     
+                 addToGrid(sortedData);
+                 }
 
                var tempData = clone(self.data);
                var sortedData = sortData(d, tempData);
@@ -214,16 +235,16 @@ function pc(){
 
                                     })
             .on("click", function(d){
+
                 //selFeature(d);
                 var tempData = clone(self.data);
                 var mean = "data";  
-                 //get all objects within the industry group
-                 var sortedData = sortData(d, tempData);     
+                //get all objects within the industry group
+                var sortedData = sortData(d, tempData);  
 
-                 addToGrid(sortedData);
+                addToGrid(sortedData);
+                loadData(mean, sortedData);
 
-                 loadData(mean, sortedData);
-                
             });
 
         // Add a group element for each dimension.
@@ -269,8 +290,10 @@ function pc(){
             foreground.style("display", function(d) {
 
             return actives.every(function(p, i) {
+
                  return extents[i][0] <= d[p] && d[p] <= extents[i][1];
             }) ? selected.push(d) && null : "none";
+
         });
             addToGrid(selected);
 

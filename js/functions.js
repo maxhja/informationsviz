@@ -14,6 +14,22 @@ return companyArray;
 }
 
 
+function getCompany(industryGroup, data){
+
+   var companyArray =[];
+   var companyObject = {};
+
+   for (var i = data.length - 1; i >= 0; i--) {
+           if(data[i]["Company Name"]==industryGroup["Company Name"]){
+            companyArray.push(data[i]);
+           }
+   };
+
+return companyArray;
+
+}
+
+
 function clone(obj) {
     // Handle the 3 simple types, and null or undefined
     if (null == obj || "object" != typeof obj) return obj;
