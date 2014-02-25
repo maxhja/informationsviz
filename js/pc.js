@@ -7,7 +7,7 @@ function pc(){
 
     var means;
     var data;
-
+    var brush_count = 0;
     var x ;
     var div;
     var tooltip;
@@ -207,6 +207,11 @@ function pc(){
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY - 28) + "px");
 
+               var tempData = clone(self.data);
+               var sortedData = sortData(d, tempData);
+
+              // addToGrid(sortedData)
+
                                     })
             .on("click", function(d){
                 //selFeature(d);
@@ -252,26 +257,27 @@ function pc(){
         return line(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
 
     }
+   
 
     // Handles a brush event, toggling the display of foreground lines.
     function brush() {
-        var array = [];
+
+        var selected = [];
+      
         var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
             extents = actives.map(function(p) { return y[p].brush.extent(); });
             foreground.style("display", function(d) {
 
             return actives.every(function(p, i) {
-                if(extents[i][0] <= d[p] && d[p] <= extents[i][1])
-                {
-                    
-                    array.push(d);
-                    addToGrid(array);
-                   // console.log(d);
-                }
-                return extents[i][0] <= d[p] && d[p] <= extents[i][1];
-            }) ? null : "none";
+                 return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+            }) ? selected.push(d) && null : "none";
         });
+            addToGrid(selected);
+
+          //  path(selected);
+    
     }
+
 
     //method for selecting the pololyne from other components	
     this.selectLine = function(value){
@@ -291,7 +297,23 @@ function pc(){
         //...
     };
 
-    
+    function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
 
    
 }
