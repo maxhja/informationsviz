@@ -62,11 +62,7 @@ function clone(obj) {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
 
-if (window.jQuery) {  
-    console.log("sdasd");
-} else {
-    console.log("Date");
-} 
+
 
 function getHistoricalData(ticker) {
  

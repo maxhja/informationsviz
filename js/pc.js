@@ -62,11 +62,8 @@ function pc(){
 
     function loadData(value, sortedData) {
 
-<<<<<<< HEAD
-        d3.select("#pc>svg")
-=======
+
         d3.select("#pc > svg")
->>>>>>> a39d0caa78cfd2f16a42166a9bb8cc5b41c11b14
        .remove();
 
      tooltip = d3.select("body").append("div")
