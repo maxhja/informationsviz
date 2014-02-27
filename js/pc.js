@@ -8,7 +8,7 @@ function pc(){
 
     var means;
     var data;
-
+    var brush_count = 0;
     var x ;
     var div;
     var tooltip;
@@ -62,7 +62,11 @@ function pc(){
 
     function loadData(value, sortedData) {
 
+<<<<<<< HEAD
         d3.select("#pc>svg")
+=======
+        d3.select("#pc > svg")
+>>>>>>> a39d0caa78cfd2f16a42166a9bb8cc5b41c11b14
        .remove();
 
      tooltip = d3.select("body").append("div")
@@ -226,7 +230,7 @@ function pc(){
                     var tempData = clone(self.means);
                     //sort after company name
                     var sortedData = getCompany(d, tempData);     
-                    addToGrid(sortedData);
+                   // addToGrid(sortedData);
 
 
                 }
@@ -235,8 +239,13 @@ function pc(){
               
                  //get all objects within the industry group
                  var sortedData = sortData(d, tempData);     
-                 addToGrid(sortedData);
+               //  addToGrid(sortedData);
                  }
+
+               var tempData = clone(self.data);
+               var sortedData = sortData(d, tempData);
+
+              // addToGrid(sortedData)
 
                                     })
             .on("click", function(d){
@@ -296,25 +305,29 @@ function pc(){
         return line(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
 
     }
+   
 
     // Handles a brush event, toggling the display of foreground lines.
     function brush() {
-        var array = [];
+
+        var selected = [];
+      
         var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
             extents = actives.map(function(p) { return y[p].brush.extent(); });
             foreground.style("display", function(d) {
 
             return actives.every(function(p, i) {
-                if(extents[i][0] <= d[p] && d[p] <= extents[i][1]){
-                    
-                    array.push(d);
-                    addToGrid(array);
-                   
-                }
-                return extents[i][0] <= d[p] && d[p] <= extents[i][1];
-            }) ? null : "none";
+
+                 return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+            }) ? selected.push(d) && null : "none";
+
         });
+            addToGrid(selected);
+
+          //  path(selected);
+    
     }
+
 
     //method for selecting the pololyne from other components	
     this.selectLine = function(value){
@@ -334,7 +347,7 @@ function pc(){
         //...
     };
 
-    
+  
 
    
 }

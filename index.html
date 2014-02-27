@@ -62,25 +62,26 @@
              
                 <div class="row">
                     
-                    <!--<div class="col-xs-6">
-                       <!-- <div id="sp" style="height: 45vh;">
-                      </div>
-                    </div>-->
-                
-                    <div class="col-xs-6">
-                        <div id="stockInfo" style="height: 45vh; font-size: 9px">
-                        </div>
-                    </div>
 
                     <div class="col-xs-6">
-                        <div id="stockInfo1" style="height: 45vh;">
+                        <div id="stockInfo" style="height: 45vh; font-size: 9px; width: 92vh">
                         </div>
                     </div>
+           
+                    <div class="col-xs-6">
 
+                        <div id="plot" style="height: 45vh; width: 98vh; clip-path: url(#clip)">
+
+
+                        </div>
+                     </div>
+           
 
                 </div>
 
+
              <a href="http://localhost:8888/TNM048/projekt/informationsviz/" class="btn btn-small"><i class="icon-white icon-arrow-left"></i> Return</a>
+
              <div class="row">
                    
                     <div class="col-xs-12">
@@ -102,10 +103,11 @@
         <script src="js/vendor/underscore-min.js"></script>
         <script src="js/vendor/colorbrewer.js"></script>
         <script src="js/vendor/colorbrewer.js"></script>
-
+        <script src="http://d3js.org/d3.v3.min.js"></script>
         <!--modules js-->
-        <script src="js/pc.js"></script>
-        <script src="js/infoGrid.js"></script>
+        <script src="js/pc.js"></script> 
+        <script src="js/infoGrid.js"></script> 
+        <script src="js/infoPlot.js"></script>
         <script src="js/main.js"></script>
         <script src="js/meanOfbranch.js"></script>
         <script src="js/functions.js"></script>
