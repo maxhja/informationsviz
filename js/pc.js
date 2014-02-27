@@ -1,5 +1,6 @@
 function pc(){
     
+ 
 
     var self = this; // for internal d3 functions
 
@@ -61,7 +62,7 @@ function pc(){
 
     function loadData(value, sortedData) {
 
-        d3.select("svg")
+        d3.select("#pc>svg")
        .remove();
 
      tooltip = d3.select("body").append("div")
@@ -200,6 +201,16 @@ function pc(){
                 tooltip.transition()
                 .duration(500)
                 .style("opacity",0);
+                 if(d["Company Name"]!=null){ //get all company 
+                    
+                     addToGrid(self.data);
+                 }
+                 else{ //get all company within
+                    var tempData = clone(self.data);
+                    var sortedData = getCompany(d, tempData);     
+                    addToGrid(sortedData);
+                 }
+                   
 
                                   })
             .on("mouseover", function(d){
@@ -212,9 +223,8 @@ function pc(){
                .style("top", (d3.event.pageY -8) + "px");
 
                 if(d["Company Name"]!=null){
-                    var tempData = clone(self.data);
+                    var tempData = clone(self.means);
                     //sort after company name
-                    console.log("sss");
                     var sortedData = getCompany(d, tempData);     
                     addToGrid(sortedData);
 
@@ -236,9 +246,22 @@ function pc(){
                 var mean = "data";  
                 //get all objects within the industry group
                 var sortedData = sortData(d, tempData);  
-
+              
                 addToGrid(sortedData);
                 loadData(mean, sortedData);
+
+               var res = parseTicker(d["Exchange:Ticker"]);
+
+               var newRes =getHistoricalData(res);
+
+               if(newRes ==1 || newRes ==0){
+                console.log(newRes + "" + res);
+
+               }
+               else{
+                 console.log("could not load file :(");
+               }
+
 
             });
 

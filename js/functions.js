@@ -61,3 +61,44 @@ function clone(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
+
+if (window.jQuery) {  
+    console.log("sdasd");
+} else {
+    console.log("Date");
+} 
+
+function getHistoricalData(ticker) {
+ 
+  var rdata;
+  $.ajax({
+    type: "POST",
+    async: false,  
+    url: "js/functions.php",
+    data: {
+            ticker: ticker
+          },
+
+    dataType : "text",
+    success: function(data){
+       
+     rdata = data;
+      
+    }
+  });
+   return rdata;
+}
+
+
+function parseTicker(ticker){
+
+    var res = ticker.replace("OM:","");
+    res = res+".ST";
+
+
+
+  return res;
+
+}
+
+

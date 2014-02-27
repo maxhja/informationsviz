@@ -100,7 +100,23 @@ textarea {
 html,
 body {
     height: 100%;
+     -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    background:#ece6d6 url(../img/bg-light.png) repeat;
     /* The html and body elements cannot have any padding or margin. */
+}
+
+#pc{
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #888;
+}
+
+#stockInfo {
+     background-color: white;
+    border-radius: 5px;
+    border: 1px solid #888;
+
 }
 
 /* Wrapper for page content to push down footer */
@@ -318,17 +334,15 @@ body {
     }
 }
 
+.btnPC {
+  position: relative;
+  padding-left: 33em;
+  padding-bottom: 3em;
+  float: none;
 
-div.tooltip {   
-  position: absolute;           
-  text-align: center;           
-  width: 60px;                  
-  height: 28px;                 
-  padding: 2px;             
-  font: 12px sans-serif;        
-  background: lightsteelblue;   
-  border: 0px;      
-  border-radius: 8px;           
-  pointer-events: none;         
+
 }
+
+
+
 
