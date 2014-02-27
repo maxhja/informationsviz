@@ -61,7 +61,7 @@ function pc(){
 
     function loadData(value, sortedData) {
 
-        d3.select("svg")
+        d3.select("#pc > svg")
        .remove();
 
      tooltip = d3.select("body").append("div")
@@ -216,7 +216,7 @@ function pc(){
                     //sort after company name
                     console.log("sss");
                     var sortedData = getCompany(d, tempData);     
-                    addToGrid(sortedData);
+                   // addToGrid(sortedData);
 
 
                 }
@@ -225,7 +225,7 @@ function pc(){
               
                  //get all objects within the industry group
                  var sortedData = sortData(d, tempData);     
-                 addToGrid(sortedData);
+               //  addToGrid(sortedData);
                  }
 
                var tempData = clone(self.data);
@@ -320,23 +320,7 @@ function pc(){
         //...
     };
 
-    function shuffle(array) {
-  var m = array.length, t, i;
-
-  // While there remain elements to shuffle…
-  while (m) {
-
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
-
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
-}
+  
 
    
 }

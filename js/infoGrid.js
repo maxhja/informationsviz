@@ -6,8 +6,8 @@ function infoGrid() {
   //create the grid with slickgrid
 
   var columns = [
-    {id: "stock", name: "Stock Name", field: "Stock", width: 120},
-    {id: "ig", name: "Industry Group", field: "ig", width: 120},
+    {id: "stock", name: "Stock Name", field: "Stock", width: 140},
+    {id: "ig", name: "Industry Group", field: "ig", width: 140},
     {id: "pe", name: "P/E", field: "pe"},
     {id: "ps", name: "P/S", field: "ps"},
     {id: "dy", name: "Dividend Yield", field: "dy"},
@@ -18,7 +18,7 @@ function infoGrid() {
 
 
   var options = {
-    enableCellNavigation: true,
+    enableCellNavigation: false,
     enableColumnReorder: false
   };
 
@@ -48,6 +48,7 @@ function infoGrid() {
             console.log(data[args.row]);
         // or dataView.getItem(args.row);
         });
+
 
             
     }
