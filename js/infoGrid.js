@@ -45,7 +45,20 @@ function infoGrid() {
         }
         self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
         self.grid.onClick.subscribe(function(e, args) {
-            console.log(data[args.row]);
+          
+          var res = parseTicker(data[args.row]["Exchange:Ticker"]);
+
+          var newRes =getHistoricalData(res);
+
+               if(newRes ==1 || newRes ==0){
+                
+                infoPlot1.setFile(res);
+
+               }
+               else{
+                 console.log("could not load file :(");
+               }
+
         // or dataView.getItem(args.row);
         });
 

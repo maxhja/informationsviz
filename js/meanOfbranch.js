@@ -48,7 +48,6 @@ function meanOfbranch(data) {
 
                     if(calc>0){
 
-
                        mean[temp] = '' + calc/counter + '';
                        mean["Size of Branch"] = counter;
 
@@ -60,7 +59,7 @@ function meanOfbranch(data) {
                 
                 meanArray.push(mean);      
   }
- console.log(meanArray);
+
   return meanArray;
 
 };
