@@ -63,6 +63,7 @@ function pc(){
     function loadData(value, sortedData) {
 
 
+
         d3.select("#pc > svg")
        .remove();
 
@@ -78,7 +79,7 @@ function pc(){
 
 
     x = d3.scale.ordinal().rangePoints([0, width], 1),
-        y = {};
+    y = {};
 
 
         svg = d3.select("#pc").append("svg:svg")
@@ -92,6 +93,7 @@ function pc(){
 
         var means = meanOfbranch(sortedData);
             infoGrid1.addGrid(means);
+
             setScale(self.means)
         }
         else if("data"==value){
@@ -109,10 +111,11 @@ function pc(){
         }
 
         function setScale(data1){
-            
+             
             x.domain(dimensions = d3.keys(data1[0]).filter(function(d) {
             return d !=  getDimension(d) && [(y[d] = d3.scale.linear() //Remove Country
                 .domain(d3.extent(data1, function(p) { 
+
                     return +p[d]; }))
                 .range([height, 0]))];
             }));
@@ -124,6 +127,7 @@ function pc(){
 
       //Slut på loaddata
       function getDimension(d){
+
             var l = dimensionsOfStock.length;
             var i;
             for(i=0; i<l;i++){
@@ -135,7 +139,7 @@ function pc(){
     }
 
     function draw(value){
-
+     
         //adds all the stock
         cc = {};
         var color = d3.scale.category20c();
@@ -144,6 +148,7 @@ function pc(){
         var dataSet= null;
 
         if(value =="mean"){
+
             self.means.forEach(function(d){
                     cc[d["Industry Group"]] = color(d["Industry Group"]);
             });
@@ -208,8 +213,8 @@ function pc(){
                  }
                  else{ //get all company within
                     var tempData = clone(self.data);
-                    var sortedData = getCompany(d, tempData);     
-                    addToGrid(sortedData);
+                   // var sortedData = getCompany(d, tempData);     
+                   // addToGrid(sortedData);
                  }
                    */
 
@@ -226,7 +231,7 @@ function pc(){
                 if(d["Company Name"]!=null){
                     var tempData = clone(self.means);
                     //sort after company name
-                    var sortedData = getCompany(d, tempData);     
+                    //var sortedData = getCompany(d, tempData);     
                    // addToGrid(sortedData);
 
 
@@ -261,7 +266,8 @@ function pc(){
                var newRes =getHistoricalData(res);
 
                if(newRes ==1 || newRes ==0){
-                console.log(newRes + "" + res);
+                
+                infoPlot1.setFile(res);
 
                }
                else{
