@@ -114,6 +114,13 @@ body {
 
 #stockInfo {
      background-color: white;
+     border-radius: 5px;
+     border: 1px solid #888;
+
+}
+
+#plot{
+    background-color: white;
     border-radius: 5px;
     border: 1px solid #888;
 

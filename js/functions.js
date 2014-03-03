@@ -91,8 +91,6 @@ function parseTicker(ticker){
     var res = ticker.replace("OM:","");
     res = res+".ST";
 
-
-
   return res;
 
 }
