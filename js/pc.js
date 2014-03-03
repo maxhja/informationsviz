@@ -202,7 +202,7 @@ function pc(){
                 tooltip.transition()
                 .duration(500)
                 .style("opacity",0);
-                 if(d["Company Name"]!=null){ //get all company 
+             /*    if(d["Company Name"]!=null){ //get all company 
                     
                      addToGrid(self.data);
                  }
@@ -211,7 +211,7 @@ function pc(){
                     var sortedData = getCompany(d, tempData);     
                     addToGrid(sortedData);
                  }
-                   
+                   */
 
                                   })
             .on("mouseover", function(d){
@@ -222,7 +222,7 @@ function pc(){
                 tooltip.html(d[setColorType])
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY -8) + "px");
-
+/*
                 if(d["Company Name"]!=null){
                     var tempData = clone(self.means);
                     //sort after company name
@@ -243,7 +243,7 @@ function pc(){
                var sortedData = sortData(d, tempData);
 
               // addToGrid(sortedData)
-
+              */
                                     })
             .on("click", function(d){
 

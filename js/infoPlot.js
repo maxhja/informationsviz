@@ -4,8 +4,8 @@ function infoPlot(){
 
     var ipDiv = $("#plot");
   
- var margin = {top: 10, right: 10, bottom: 100, left: 0},
-    margin2 = {top: 150, right: 10, bottom: 5, left: 0},
+ var margin = {top: 10, right: 10, bottom: 200, left: 25},
+    margin2 = {top: 200, right: 10, bottom: 20, left: 25},
     width = ipDiv.width() - margin.left - margin.right,
     height = ipDiv.height() - margin.top - margin.bottom,
     height2 = ipDiv.height() - margin2.top - margin2.bottom;
@@ -80,11 +80,11 @@ svg.append("defs").append("clipPath")
     .attr("height", height);
 
 
-var focus = svg.append("svg:g")
+var focus = svg.append("g")
     .attr("class", "focus")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var context = svg.append("svg:g")
+var context = svg.append("g")
     .attr("class", "context")
     .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
