@@ -1,6 +1,14 @@
 function infoPlot(){
 
-    var self = this; // for internal d3 functions
+     var self = this; // for internal d3 functions
+     var context, focus, svg;
+     var fileName;
+     var area, area2;
+     var xAxis;
+     var parseDate;
+     var x, x2,y,y2;
+     var brush;
+     var line;
 
     var ipDiv = $("#plot");
   
@@ -10,6 +18,23 @@ function infoPlot(){
     height = ipDiv.height() - margin.top - margin.bottom,
     height2 = ipDiv.height() - margin2.top - margin2.bottom;
 
+this.setFile = function(fileName){
+ 
+  setFileName(fileName);
+}
+
+function setFileName(fileName){
+  fileName ="js/hist/"+fileName +".csv";
+
+  loadData(fileName);
+}
+
+  
+
+function loadData(pathToFile){
+
+ d3.select("#plot > svg")
+       .remove();
 /*       
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     margin2 = {top: 5, right: 5, bottom: 30, left: 40},
@@ -23,15 +48,20 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
         height = ipDiv.height() - margin.top - margin.bottom
         height2 = ipDiv.height() - margin2.top - margin2.bottom;
 */
-    var parseDate = d3.time.format("%Y-%m-%d").parse;
+     parseDate = d3.time.format("%Y-%m-%d").parse;
 
-    var x = d3.time.scale().range([0, width]);
+     x = d3.time.scale().range([0, width]);
 
-    var x2 = d3.time.scale().range([0, width]);
+    x2 = d3.time.scale().range([0, width]);
 
-    var y = d3.scale.linear().range([height, 0]);
+     y = d3.scale.linear().range([height, 0]);
 
-    var y2 = d3.scale.linear().range([height, 0]);
+     y2 = d3.scale.linear().range([height, 0]);
+
+brush = d3.svg.brush()
+    .x(x2)
+    .on("brush", brushed);
+
 
 
 /*
@@ -40,7 +70,7 @@ var x = d3.time.scale().range([0, width]),
     y = d3.scale.linear().range([height, 0]),
     y2 = d3.scale.linear().range([height2, 0]);
 */
-var xAxis = d3.svg.axis().scale(x).orient("bottom"),
+    xAxis = d3.svg.axis().scale(x).orient("bottom"),
     xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
     yAxis = d3.svg.axis().scale(y).orient("left");
 
@@ -50,33 +80,27 @@ var brush = d3.svg.brush()
     .on("brush", brushed);
     */
 
-var area = d3.svg.area()
+     area = d3.svg.area()
     .interpolate("monotone")
     .x(function(d) { return x(d["Date"]); })
     .y0(height)
     .y1(function(d) { return y(d["Close"]); });
 
-var area2 = d3.svg.area()
+     area2 = d3.svg.area()
     .interpolate("monotone")
     .x(function(d) { return x2(d["Date"]); })
     .y0(height2)
     .y1(function(d) { return y2(d["Close"]); });
- 
- var fileName;
 
+    line = d3.svg.line()
+    .x(function(d) { return x2(d["Date"]); })
+    .y(function(d) { return y2(d["Close"]); });
+/*     line = d3.svg.line()
+    .x(function(d) { return x(d["Date"]); })
+    .y0(height2)
+    .y1(function(d) { return y(d["Close"]); });
 
-this.setFile = function(fileName){
- 
-  setFileName(fileName);
-}
-
-function setFileName(fileName){
-  fileName ="js/hist/"+fileName +".csv";
-
-  loadData(fileName);
-}
-
-
+*/
 /*
 var svg = d3.select("#plot").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -84,33 +108,28 @@ var svg = d3.select("#plot").append("svg")
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 */
-var svg = d3.select("#plot").append("svg")
+     svg = d3.select("#plot").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
+    .attr("height", height + margin.top + margin.bottom)
 
-svg.append("defs").append("clipPath")
+
+    svg.append("defs").append("clipPath")
     .attr("id", "clip")
  	.append("rect")
     .attr("width", width)
     .attr("height", height);
 
 
-var focus = svg.append("g")
+    focus = svg.append("g")
     .attr("class", "focus")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var context = svg.append("g")
+    context = svg.append("g")
     .attr("class", "context")
     .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
 
-function loadData(pathToFile){
 
-
-
-  var brush = d3.svg.brush()
-    .x(x2)
-    .on("brush", brushed);
  
 
   d3.csv(pathToFile, type, function(error, data) {
@@ -152,11 +171,12 @@ function loadData(pathToFile){
         .attr("y", -6)
         .attr("height", height2 + 7);
   });
-
+}
 
   function brushed() {
+
     x.domain(brush.empty() ? x2.domain() : brush.extent());
-    focus.select(".path").attr("d", area);
+    focus.select(".area").attr("d", area);
     focus.select(".x.axis").call(xAxis);
   }
 
@@ -166,7 +186,7 @@ function loadData(pathToFile){
     d["Close"] = +d["Close"];
     return d;
   }
-}
+
 
 
 

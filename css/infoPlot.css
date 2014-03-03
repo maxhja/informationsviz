@@ -1,5 +1,17 @@
-#plot > svg 
+#plot > svg > .focus > .line
  {
-    fill: red;
+  fill: none;
+  stroke: steelblue;
+  
+}
+#plot > svg > .focus > .area
+ {
+  fill: none;
+  stroke: steelblue;
+  
+}
+#plot > svg > .context > .area
+ {
+  fill: steelblue;
 
 }
