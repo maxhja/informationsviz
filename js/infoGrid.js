@@ -34,6 +34,7 @@ function infoGrid() {
  
 
     if(data[0]["Company Name"]==null){
+
       var columns = [
         {id: "ig", name: "Industry Group", field: "ig", width: 140},
         {id: "pe", name: "P/E", field: "pe"},
@@ -70,13 +71,16 @@ function infoGrid() {
               beta: data[i]["Beta"]
             };
         }
+
         self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
+
         self.grid.onClick.subscribe(function(e, args) {
           
           if(data[args.row]["Exchange:Ticker"]!=null){
 
             var res = parseTicker(data[args.row]["Exchange:Ticker"]);
             var newRes =getHistoricalData(res);
+            self.grid.setSortColumn("Stock",true);
 
             if(newRes ==1 || newRes ==0){
                   
@@ -98,7 +102,7 @@ function infoGrid() {
     
         });
 
-
+       //columnId, ascending
             
     }
      
