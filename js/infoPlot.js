@@ -130,8 +130,6 @@ var svg = d3.select("#plot").append("svg")
 
 
 
- 
-
   d3.csv(pathToFile, type, function(error, data) {
 
     
@@ -185,6 +183,19 @@ var svg = d3.select("#plot").append("svg")
     d["Date"] = parseDate(d["Date"]);
     d["Close"] = +d["Close"];
     return d;
+  }
+
+  this.setTitle = function(title){
+      addTitle(title)
+  }
+
+  function addTitle(title){
+        // Add title    
+  svg.append("svg:text")
+     .attr("class", "title")
+     .attr("x", 50)
+     .attr("y", 20)
+     .text(title);
   }
 
 

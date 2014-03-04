@@ -265,6 +265,7 @@ function pc(){
                if(newRes ==1 || newRes ==0){
                 
                 infoPlot1.setFile(res);
+                infoPlot1.setTitle(d["Company Name"]);
 
                }
                else{

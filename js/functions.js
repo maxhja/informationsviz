@@ -88,8 +88,17 @@ function getHistoricalData(ticker) {
 
 function parseTicker(ticker){
 
-    var res = ticker.replace("OM:","");
-    res = res+".ST";
+  if(ticker.indexOf(" ")){
+    
+     ticker = ticker.replace(" ","-");
+  }
+  if(ticker.indexOf("NYSE")===0){
+    ticker = null;
+    ticker = "ALIV-SDB";
+  }
+  
+  var res = ticker.replace("OM:","");
+  res = res+".ST";
 
   return res;
 
