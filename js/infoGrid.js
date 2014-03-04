@@ -36,7 +36,7 @@ function infoGrid() {
       if(data[0]["Company Name"]==null){
 
         var columns = [
-          {id: "ig", name: "Industry Group", field: "ig", width: 140},
+          {id: "ig", name: "Industry Group", field: "ig", width: 100},
           {id: "pe", name: "P/E", field: "pe"},
           {id: "ps", name: "P/S", field: "ps"},
           {id: "dy", name: "Dividend Yield", field: "dy"},
@@ -45,8 +45,8 @@ function infoGrid() {
         }
         else{
           var columns = [
-          {id: "Stock", name: "Company Name", field: "Stock", width: 140},
-          {id: "ig", name: "Industry Group", field: "ig", width: 140},
+          {id: "Stock", name: "Company Name", field: "Stock", width: 100},
+          {id: "ig", name: "Industry Group", field: "ig", width: 100},
           {id: "pe", name: "P/E", field: "pe"},
           {id: "ps", name: "P/S", field: "ps"},
           {id: "dy", name: "Dividend Yield", field: "dy"},
