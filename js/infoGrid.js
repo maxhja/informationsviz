@@ -4,9 +4,9 @@ function infoGrid() {
   self.grid=null;	
  
   //create the grid with slickgrid
-
+ 
   var columns = [
-    {id: "stock", name: "Stock Name", field: "Stock", width: 140},
+    
     {id: "ig", name: "Industry Group", field: "ig", width: 140},
     {id: "pe", name: "P/E", field: "pe"},
     {id: "ps", name: "P/S", field: "ps"},
@@ -30,6 +30,33 @@ function infoGrid() {
 
     this.addGrid = function(data){
 
+     var columns;
+ 
+
+    if(data[0]["Company Name"]==null){
+      var columns = [
+        {id: "ig", name: "Industry Group", field: "ig", width: 140},
+        {id: "pe", name: "P/E", field: "pe"},
+        {id: "ps", name: "P/S", field: "ps"},
+        {id: "dy", name: "Dividend Yield", field: "dy"},
+        {id: "beta", name: "Beta", field: "beta"},
+       ];
+      }
+      else{
+        var columns = [
+        {id: "Stock", name: "Company Name", field: "Stock", width: 140},
+        {id: "ig", name: "Industry Group", field: "ig", width: 140},
+        {id: "pe", name: "P/E", field: "pe"},
+        {id: "ps", name: "P/S", field: "ps"},
+        {id: "dy", name: "Dividend Yield", field: "dy"},
+        {id: "beta", name: "Beta", field: "beta"},
+       ];
+
+      }
+    
+
+
+
           var dataPicked = [];
 	        var length = data.length;
 
@@ -46,20 +73,29 @@ function infoGrid() {
         self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
         self.grid.onClick.subscribe(function(e, args) {
           
-          var res = parseTicker(data[args.row]["Exchange:Ticker"]);
+          if(data[args.row]["Exchange:Ticker"]!=null){
 
-          var newRes =getHistoricalData(res);
+            var res = parseTicker(data[args.row]["Exchange:Ticker"]);
+            var newRes =getHistoricalData(res);
 
-               if(newRes ==1 || newRes ==0){
-                
-                infoPlot1.setFile(res);
+            if(newRes ==1 || newRes ==0){
+                  
+                  infoPlot1.setFile(res);
 
-               }
-               else{
-                 console.log("could not load file :(");
-               }
+            }
+            else{
+                   console.log("could not load file :(");
+            }
 
-        // or dataView.getItem(args.row);
+          }
+          else{
+
+            pc1.addToPc(data[args.row]);
+          
+          }
+          
+
+    
         });
 
 

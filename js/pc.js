@@ -44,9 +44,6 @@ function pc(){
     
     //initialize tooltip
 
-
-        
-
     d3.csv("data/svenska_aktier2.csv", function(data) {
         
         means = meanOfbranch(data);
@@ -64,8 +61,8 @@ function pc(){
 
 
 
-        d3.select("#pc > svg")
-       .remove();
+    d3.select("#pc > svg")
+    .remove();
 
      tooltip = d3.select("body").append("div")
                     .attr("class", "tooltip")
@@ -337,17 +334,26 @@ function pc(){
          
     };
 
-    //add data to to the grid
-    function addToGrid(value) {
+    this.addToPc = function(value){
+        test(value);
 
-        infoGrid1.addGrid(value);
+    }
 
-    };
+    function test(value){
+
+         var tempData = clone(self.data);
+         var mean = "data";  
+         //get all objects within the industry group
+         var sortedData = sortData(value, tempData);       
+         addToGrid(sortedData);
+         loadData(mean, sortedData);
+ 
+    }
 
     //method for selecting features of other components
     function selFeature(value){
-        console.log(value);
-        //...
+
+       
     };
 
   

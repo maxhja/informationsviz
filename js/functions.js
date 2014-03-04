@@ -95,4 +95,11 @@ function parseTicker(ticker){
 
 }
 
+//add data to to the grid
+function addToGrid(value) {
+
+        infoGrid1.addGrid(value);
+
+};
+
 
