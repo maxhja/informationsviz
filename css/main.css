@@ -420,4 +420,19 @@ body {
 .close:hover { background: #00d9ff; }
 
 
+#dvLoading
+{
+   background:url(../img/gif-load.gif) no-repeat center center;
+   height: 100px;
+   width: 100px;
+   position: fixed;
+   z-index: 1000;
+   left: 50%;
+   top: 50%;
+   margin: -25px 0 0 -25px;
+  
+}
+
+
+
 
