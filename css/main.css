@@ -359,9 +359,10 @@ body {
 
 
 }
-
+.slick-cell:hover{cursor: pointer;}
 .slick-row:hover{
     background: none repeat scroll 0 0 grey;
+    cursor: pointer;
 }
 
 .modalDialog {
