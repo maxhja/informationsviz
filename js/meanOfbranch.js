@@ -48,7 +48,7 @@ function meanOfbranch(data) {
 
                     if(calc>0){
 
-                       mean[temp] = '' + calc/counter + '';
+                       mean[temp] = '' + (calc/counter).toFixed(2) + ''; //only use 2 decimals
                        mean["Size of Branch"] = counter;
 
                       

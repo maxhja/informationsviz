@@ -111,4 +111,11 @@ function addToGrid(value) {
 
 };
 
+$(window).load(function(){
+
+  $('#dvLoading').fadeOut(2000);
+
+});
+
+
 
