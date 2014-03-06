@@ -19,7 +19,8 @@ function infoGrid() {
 
   var options = {
     enableCellNavigation: false,
-    enableColumnReorder: false
+    enableColumnReorder: false,
+    multiColumnSort: true
   };
 
 //method for selecting features of other components
@@ -72,10 +73,28 @@ function infoGrid() {
 
           self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
 
-          var cols = self.grid.getColumns();
-          var sortable = cols[0].sortable;
-          sortable ? console.log("It's sortable!") : console.log("It's not sortable!");
-          self.grid.setSortColumn("ig",true); 
+
+          self.grid.onSort.subscribe(function (e, args) {
+              
+              var cols = args.sortCols;
+              console.log(cols);
+              console.log(args);
+
+              dataPicked.sort(function (dataRow1, dataRow2) {
+                for (var i = 0, l = cols.length; i < l; i++) {
+                  var field = cols[i].sortCol.field;
+                  var sign = cols[i].sortAsc ? 1 : -1;
+                  var value1 = dataRow1[field], value2 = dataRow2[field];
+                  var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+                  if (result != 0) {
+                    return result;
+                  }
+                }
+                return 0;
+              });
+              self.grid.invalidate();
+              self.grid.render();
+            });
 
           self.grid.onClick.subscribe(function(e, args) {
             
