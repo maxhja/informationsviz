@@ -31,10 +31,6 @@ function infoGrid() {
 
     this.addGrid = function(data){
      
-
-
-   
-
       if(data[0]["Company Name"]==null){
 
         var columns = [
@@ -48,11 +44,11 @@ function infoGrid() {
         else{
           var columns = [
           {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
-          {id: "ig", name: "Industry Group", field: "ig", width: 100},
-          {id: "pe", name: "P/E", field: "pe"},
-          {id: "ps", name: "P/S", field: "ps"},
-          {id: "dy", name: "Dividend Yield", field: "dy"},
-          {id: "beta", name: "Beta", field: "beta"},
+          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
+          {id: "pe", name: "P/E", field: "pe", sortable: true},
+          {id: "ps", name: "P/S", field: "ps", sortable: true},
+          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
+          {id: "beta", name: "Beta", field: "beta", sortable: true},
          ];
 
         }
