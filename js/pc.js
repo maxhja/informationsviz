@@ -1,11 +1,12 @@
 function pc(){
     
+   
  
 
     var self = this; // for internal d3 functions
 
     self.means =null;
-    var brush
+    var brush;
     var means;
     var data;
     var brush_count = 0;

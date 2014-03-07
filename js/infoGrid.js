@@ -1,7 +1,7 @@
 function infoGrid() {
 
-	var self = this; // for internal d3 functions
-  self.grid=null;	
+  var self = this; // for internal d3 functions
+  self.grid=null; 
  
   //create the grid with slickgrid
  
@@ -153,14 +153,14 @@ d3.csv("data/svenska_aktier2.csv", function(data) {
         }
 
         var dataPicked = [];
-  	    var length = data.length;
+        var length = data.length;
 
-  	     for (var i = 0; i < length; i++) {
-  		      dataPicked[i] = {
-  			        Stock: data[i]["Company Name"],
+         for (var i = 0; i < length; i++) {
+            dataPicked[i] = {
+                Stock: data[i]["Company Name"],
                 ig: data[i]["Industry Group"],
-  			        pe: data[i]["Current PE"],
-  			        ps: data[i]["PS"],
+                pe: data[i]["Current PE"],
+                ps: data[i]["PS"],
                 dy: data[i]["Dividend Yield"],
                 beta: data[i]["Beta"]
               };
@@ -229,7 +229,7 @@ d3.csv("data/svenska_aktier2.csv", function(data) {
     }
      
     
-    //method for selecting the pololyne from other components	
+    //method for selecting the pololyne from other components 
     this.selectLine = function(value){
         
 
