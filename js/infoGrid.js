@@ -12,8 +12,6 @@ function infoGrid() {
     {id: "ps", name: "P/S", field: "ps"},
     {id: "dy", name: "Dividend Yield", field: "dy"},
     {id: "beta", name: "Beta", field: "beta"},
-    
-
   ];
 
   var options = {
@@ -22,113 +20,73 @@ function infoGrid() {
     multiColumnSort: true
   };
 
-//method for selecting features of other components
-    function selFeature(value){
-     
+  $("#myButton").click(function(){
+   var value= $("#mySearch").val();
+   var dataPick = [];
+   var arrayToPc =[];
+   
 
-    }
+        d3.csv("data/svenska_aktier2.csv", function(data) {
+         var counter = 0;
+                 for (var i = 0; i < data.length; i++) {
+                 
+                  var temp = data[i]["Company Name"];
+                  var re = new RegExp(value,'gi');
+                  var test = temp.match(re);
+                      if(test != null){
+                          dataPick[counter] = {
+                              Stock: data[i]["Company Name"],
+                              ig: data[i]["Industry Group"],
+                              pe: data[i]["Current PE"],
+                              ps: data[i]["PS"],
+                              dy: data[i]["Dividend Yield"],
+                              beta: data[i]["Beta"],
+                              Ticker: data[i]["Exchange:Ticker"]
+                            };
+                            counter++;
+                            arrayToPc.push(data[i]);
+                      }
+                  }
 
-    $("#myButton").click(function(){
+                 pc1.addToPCFromSearchBar(arrayToPc);
+          
+              var columns = [
+                  {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
+                  {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
+                  {id: "pe", name: "P/E", field: "pe", sortable: true},
+                  {id: "ps", name: "P/S", field: "ps", sortable: true},
+                  {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
+                  {id: "beta", name: "Beta", field: "beta", sortable: true},
+                 ];
+               
+              self.grid = new Slick.Grid("#stockInfo", dataPick, columns, options);
 
-       
+                  self.grid.onClick.subscribe(function(e, args) {
         
-
-      var value= $("#mySearch").val();
-      var dataPick = [];
-
-      
-d3.csv("data/svenska_aktier2.csv", function(data) {
- var counter = 0;
-         for (var i = 0; i < data.length; i++) {
-         
-          var temp = data[i]["Company Name"];
-          var re = new RegExp(value,'gi');
-          var test = temp.match(re);
-
-              if(test != null)
-              {
-
-                  dataPick[counter] = {
-                      Stock: data[i]["Company Name"],
-                      ig: data[i]["Industry Group"],
-                      pe: data[i]["Current PE"],
-                      ps: data[i]["PS"],
-                      dy: data[i]["Dividend Yield"],
-                      beta: data[i]["Beta"],
-                      Ticker: data[i]["Exchange:Ticker"]
-                    };
-                    counter++;
-              }
-          }
-  
-                  var columns = [
-          {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
-          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
-          {id: "pe", name: "P/E", field: "pe", sortable: true},
-          {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
-         ];
-
-          self.grid = new Slick.Grid("#stockInfo", dataPick, columns, options);
-
-            self.grid.onClick.subscribe(function(e, args) {
-
+                  if(dataPick[args.row]["Ticker"]!=null){
+                      var res = parseTicker(dataPick[args.row]["Ticker"]);
+                      var newRes =getHistoricalData(res);
+                      if(newRes ==1 || newRes ==0){    
+                            infoPlot1.setFile(res);
+                            infoPlot1.setTitle(dataPick[args.row]["Company Name"]);
+                      }
+                      else{
+                             console.log("could not load file :(");
+                      }
+                    }
+                    else{
+                      pc1.addToPc(dataPick[args.row]);
+                  
+                    }
                     
-               if(dataPick[args.row]["Ticker"]!=null){
-
-              var res = parseTicker(dataPick[args.row]["Ticker"]);
-              var newRes =getHistoricalData(res);
-             
-
-
-              if(newRes ==1 || newRes ==0){
-                    
-                    infoPlot1.setFile(res);
-                    infoPlot1.setTitle(dataPick[args.row]["Company Name"]);
-
-              }
-              else{
-                     console.log("could not load file :(");
-              }
-
-            }
-            else{
-
-    
-              pc1.addToPc(dataPick[args.row]);
-            
-            }
-                  
-                  
-                  
-
-            
                 });
 
-   });  
+           });  
 
-      
-           
-
-
-   
-              
-     
-      
-
-    });
-
-    function searchGrid(value){
-   
-
-
-
-
-    }
     
-
-    this.addGrid = function(data){
+    });
+    
+  this.addGrid = function(data){
   
       if(data[0]["Company Name"]==null){
 
@@ -166,15 +124,10 @@ d3.csv("data/svenska_aktier2.csv", function(data) {
               };
           }
 
-    
-
           self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
 
-
-          self.grid.onSort.subscribe(function (e, args) {
-              
+          self.grid.onSort.subscribe(function (e, args) {  //sort the list.              
               var cols = args.sortCols;
-
 
               dataPicked.sort(function (dataRow1, dataRow2) {
                 for (var i = 0, l = cols.length; i < l; i++) {
@@ -193,20 +146,14 @@ d3.csv("data/svenska_aktier2.csv", function(data) {
             });
 
           self.grid.onClick.subscribe(function(e, args) {
-                   
-            if(data[args.row]["Exchange:Ticker"]!=null){
-
+            if(data[args.row]["Exchange:Ticker"]!=null){ //ifall den har ett ticker namn innebär det att det handlar om aktier
+              console.log("pc OCNE");
               var res = parseTicker(data[args.row]["Exchange:Ticker"]);
               var newRes =getHistoricalData(res);
-             
-
-             
-
               if(newRes ==1 || newRes ==0){
-                    
+
                     infoPlot1.setFile(res);
                     infoPlot1.setTitle(data[args.row]["Company Name"]);
-
               }
               else{
                      console.log("could not load file :(");
@@ -214,27 +161,11 @@ d3.csv("data/svenska_aktier2.csv", function(data) {
 
             }
             else{
-
-    
+              
               pc1.addToPc(data[args.row]);
             
             }
-            
-
-      
           });
-
-       //columnId, ascending
-            
     }
      
-    
-    //method for selecting the pololyne from other components 
-    this.selectLine = function(value){
-        
-
-
-    };
-
-
 }

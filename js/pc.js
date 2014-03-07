@@ -337,12 +337,21 @@ function pc(){
     };
 
     this.addToPc = function(value){
+            addValueToPC(value);
         
-        test(value);
-
     }
 
-    function test(value){
+
+    this.addToPCFromSearchBar = function(stocks){
+        
+            loadData("data", stocks);
+      
+    }
+
+
+    function addValueToPC(value){
+        console.log("addValueToPC");
+        console.log(value);
 
          var tempData = clone(self.data);
          var mean = "data";  
@@ -352,14 +361,6 @@ function pc(){
          loadData(mean, sortedData);
  
     }
-
-    //method for selecting features of other components
-    function selFeature(value){
-
-       
-    };
-
-  
 
    
 }
