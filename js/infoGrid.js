@@ -16,7 +16,6 @@ function infoGrid() {
 
   ];
 
-
   var options = {
     enableCellNavigation: false,
     enableColumnReorder: false,
@@ -55,51 +54,62 @@ d3.csv("data/svenska_aktier2.csv", function(data) {
                       pe: data[i]["Current PE"],
                       ps: data[i]["PS"],
                       dy: data[i]["Dividend Yield"],
-                      beta: data[i]["Beta"]
+                      beta: data[i]["Beta"],
+                      Ticker: data[i]["Exchange:Ticker"]
                     };
                     counter++;
               }
           }
   
-searchGrid(dataPick);
+                  var columns = [
+          {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
+          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
+          {id: "pe", name: "P/E", field: "pe", sortable: true},
+          {id: "ps", name: "P/S", field: "ps", sortable: true},
+          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
+          {id: "beta", name: "Beta", field: "beta", sortable: true},
+         ];
 
-   });  
+          self.grid = new Slick.Grid("#stockInfo", dataPick, columns, options);
 
-      
-           
-/*
-                        self.grid.onClick.subscribe(function(e, args) {
+            self.grid.onClick.subscribe(function(e, args) {
+
+                    
+               if(dataPick[args.row]["Ticker"]!=null){
+
+              var res = parseTicker(dataPick[args.row]["Ticker"]);
+              var newRes =getHistoricalData(res);
+             
+
+
+              if(newRes ==1 || newRes ==0){
+                    
+                    infoPlot1.setFile(res);
+                    infoPlot1.setTitle(dataPick[args.row]["Company Name"]);
+
+              }
+              else{
+                     console.log("could not load file :(");
+              }
+
+            }
+            else{
+
+    
+              pc1.addToPc(dataPick[args.row]);
+            
+            }
                   
-                  if(data[args.row]["Exchange:Ticker"]!=null){
-
-                    var res = parseTicker(data[args.row]["Exchange:Ticker"]);
-                    var newRes =getHistoricalData(res);
-                   
-
-                   
-
-                    if(newRes ==1 || newRes ==0){
-                          
-                          infoPlot1.setFile(res);
-                          infoPlot1.setTitle(data[args.row]["Company Name"]);
-
-                    }
-                    else{
-                           console.log("could not load file :(");
-                    }
-
-                  }
-                  else{
-
-                    pc1.addToPc(data[args.row]);
                   
-                  }
                   
 
             
                 });
 
-*/
+   });  
+
+      
+           
 
 
    
@@ -111,23 +121,15 @@ searchGrid(dataPick);
 
     function searchGrid(value){
    
-        var columns = [
-          {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
-          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
-          {id: "pe", name: "P/E", field: "pe", sortable: true},
-          {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
-         ];
 
-         console.log(value);
-      self.grid = new Slick.Grid("#stockInfo", value, columns, options);
+
+
 
     }
     
 
     this.addGrid = function(data){
-     
+  
       if(data[0]["Company Name"]==null){
 
         var columns = [
@@ -191,7 +193,7 @@ searchGrid(dataPick);
             });
 
           self.grid.onClick.subscribe(function(e, args) {
-            
+                   
             if(data[args.row]["Exchange:Ticker"]!=null){
 
               var res = parseTicker(data[args.row]["Exchange:Ticker"]);
@@ -213,6 +215,7 @@ searchGrid(dataPick);
             }
             else{
 
+    
               pc1.addToPc(data[args.row]);
             
             }
