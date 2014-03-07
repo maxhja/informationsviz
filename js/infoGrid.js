@@ -31,6 +31,10 @@ function infoGrid() {
 
     this.addGrid = function(data){
      
+
+
+   
+
       if(data[0]["Company Name"]==null){
 
         var columns = [
