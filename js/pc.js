@@ -18,6 +18,8 @@ function pc(){
         background,
         foreground;
 
+
+
     var pcDiv = $("#pc");
 
     var margin = [30, 10, 10, 10],
@@ -29,11 +31,11 @@ function pc(){
                             "Book Debt to capital ratio","Market Debt to capital ratio","Book Debt to Equity Ratio",
                             "Market Debt to Equity ratio",
                             "Standard deviation in stock price","Interest coverage ratio","PEG","EV/EBIT","EV/EBITDA",
-                           "EV/Sales","Dividend Yield","Historical growth in Net Income - Last 3 years",
+                            "EV/Sales","Historical growth in Net Income - Last 3 years", "held by institutions",
                             "Historical growth in Net Income - Last 5 years","Historical growth in Revenues - Last 3 years",
                             "Historical growth in Revenues - Last 5 years","Expected growth rate in EPS- Next 5 years","Expected growth in revenues - Next 2 years",
                             "Return on Equity,Return on Capital (ROC or ROIC)","Pre-tax Operating Margin","Effective Tax Rate",
-                            "a% held by institutions","Net Income","Trailing Net Income","Operating Income","Trailing Operating Income (adj for leases)",
+                            "Net Income","Trailing Net Income","Operating Income","Trailing Operating Income (adj for leases)",
                             "Revenues","Trailing Revenues,EBITDA","Trailing EBITDA","EBIT (1-t)","Net Debt issued (Debt issue - repaid)",
                             "Change in non-cash Working capital","Net Cap Ex","Reinvestment Rate","FCFF","FCFE","FCFE without debt","Book Value of Equity - 4 qtrs ago",
                             "Invested Capital - 4 qtre ago","Current Book Value of Equity","Current Invested Capital","Dividends","Modified 2-year beta","Modified 5-year beta",
@@ -128,10 +130,11 @@ function pc(){
             var l = dimensionsOfStock.length;
             var i;
             for(i=0; i<l;i++){
-                 if(d != dimensionsOfStock[i]){
-                }
-                else 
+                 if(d != dimensionsOfStock[i]){  }
+                else {
                     return d;
+                }
+                    
             } 
     }
 
@@ -336,7 +339,7 @@ function pc(){
     };
 
     this.addToPc = function(value){
-        
+
         test(value);
 
     }
