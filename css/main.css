@@ -124,12 +124,14 @@ body {
 #stockInfo {
 
 
-     margin-right: 10px;
+     margin-right: 0px;
      background-color: white;
      border-radius: 5px;
      border: 1px solid #888;
 
 }
+
+
 
 
 
@@ -357,6 +359,7 @@ body {
 
 
 }
+
 .slick-cell:hover{cursor: pointer;}
 .slick-row:hover{
     background: none repeat scroll 0 0 grey;

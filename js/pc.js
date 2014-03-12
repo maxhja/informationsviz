@@ -40,9 +40,9 @@ function pc(){
                             "Revenues","Trailing Revenues,EBITDA","Trailing EBITDA","EBIT (1-t)","Net Debt issued (Debt issue - repaid)",
                             "Change in non-cash Working capital","Net Cap Ex","Reinvestment Rate","FCFF","FCFE","FCFE without debt","Book Value of Equity - 4 qtrs ago",
                             "Invested Capital - 4 qtre ago","Current Book Value of Equity","Current Invested Capital","Dividends","Modified 2-year beta","Modified 5-year beta",
-                            "Beta adjustment factor","Coeff of variation - Op Income","Coeff of variation - Net Income",
+                            "Beta adjustment factor","Coeff of variation - Op Income","Coeff of variation - Net Income", "Return on Capital (ROC or ROIC)",
                             "Average 10-year EBIT","Average 10-yr Net Income", "EBITDA", "Cash/ Firm Value", "Stock price (Dec 31, 2012)in US$",
-                            "Return on Capital (ROC or ROIC)", "Net Profit Margin", "Pre-tax Operating Margin","Total Debt", "Cash",
+                            "Net Profit Margin", "Pre-tax Operating Margin","Total Debt", "Cash",
                             "Return on Equity", "Trailing Revenues", "Size of Branch"]
     
     //initialize tooltip

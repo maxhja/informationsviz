@@ -7,11 +7,13 @@ function infoGrid() {
  
   var columns = [
     
-    {id: "ig", name: "Industry Group", field: "ig", width: 140},
+    {id: "ig", name: "Industry Group", field: "ig", width: 180},
+    {id: "beta", name: "Beta", field: "beta"},
     {id: "pe", name: "P/E", field: "pe"},
     {id: "ps", name: "P/S", field: "ps"},
-    {id: "dy", name: "Dividend Yield", field: "dy"},
+    {id: "dy", name: "Dividend Yield", field: "dy", width: 140},
     {id: "beta", name: "Beta", field: "beta"},
+    {id: "evin", name: "EV/Invested Capital", field: "evin"},
   ];
 
   var options = {
@@ -37,11 +39,13 @@ function infoGrid() {
                           dataPick[counter] = {
                               Stock: data[i]["Company Name"],
                               ig: data[i]["Industry Group"],
+                              beta: data[i]["Beta"],
                               pe: data[i]["Current PE"],
                               ps: data[i]["PS"],
                               dy: data[i]["Dividend Yield"],
                               beta: data[i]["Beta"],
-                              Ticker: data[i]["Exchange:Ticker"]
+                              evin: data[i]["EV/Invested Capital"],
+                              Ticker: data[i]["Exchange:Ticker"],
                             };
                             counter++;
                             arrayToPc.push(data[i]);
@@ -53,10 +57,11 @@ function infoGrid() {
               var columns = [
                   {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
                   {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
+                  {id: "beta", name: "Beta", field: "beta", sortable: true},
                   {id: "pe", name: "P/E", field: "pe", sortable: true},
                   {id: "ps", name: "P/S", field: "ps", sortable: true},
-                  {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
-                  {id: "beta", name: "Beta", field: "beta", sortable: true},
+                  {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },  
+                  {id: "evin", name: "EV/Invested Capital", field: "evin", sortable: true},
                  ];
                
               self.grid = new Slick.Grid("#stockInfo", dataPick, columns, options);
@@ -92,20 +97,24 @@ function infoGrid() {
 
         var columns = [
           {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 100},
+          {id: "beta", name: "Beta", field: "beta", sortable: true},
           {id: "pe", name: "P/E", field: "pe", sortable: true},
           {id: "ps", name: "P/S", field: "ps", sortable: true},
+          {id: "evin", name: "EV/Invested Capital", field: "evin", sortable: true},
           {id: "dy", name: "Dividend Yield", field: "dy" , sortable: true},
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
+          
          ];
         }
         else{
           var columns = [
           {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
           {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
+          {id: "beta", name: "Beta", field: "beta", sortable: true},
           {id: "pe", name: "P/E", field: "pe", sortable: true},
           {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
+          {id: "evin", name: "EV/Invested Capital", field: "evin", sortable: true},
+          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },      
+          
          ];
 
         }
@@ -120,7 +129,8 @@ function infoGrid() {
                 pe: data[i]["Current PE"],
                 ps: data[i]["PS"],
                 dy: data[i]["Dividend Yield"],
-                beta: data[i]["Beta"]
+                beta: data[i]["Beta"],
+                evin: data[i]["EV/Invested Capital"]
               };
           }
 
