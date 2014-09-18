@@ -7,11 +7,11 @@ function infoGrid() {
 
   var columns = [
 
-    {id: "ig", name: "Industry Group", field: "ig", width: 160, resizable: true},
+    {id: "ig", name: "Industry Group", field: "ig", width: 120, resizable: true},
     {id: "pe", name: "P/E", field: "pe", width: 350, minWidth: 120, resizable: true},
-    {id: "ps", name: "P/S", field: "ps", resizable: true},
-    {id: "dy", name: "Dividend Yield", field: "dy", resizable: true},
-    {id: "beta", name: "Beta", field: "beta", width: 160, resizable: true},
+    {id: "ps", name: "P/S", field: "ps", resizable: true, width: 120},
+    {id: "dy", name: "Dividend Yield", field: "dy", resizable: true, width: 120},
+    {id: "beta", name: "Beta", field: "beta", width: 120, resizable: true},
   ];
 
   var options = {
@@ -92,21 +92,21 @@ function infoGrid() {
       if(data[0]["Company Name"]==null){
 
         var columns = [
-          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 100},
-          {id: "pe", name: "P/E", field: "pe", sortable: true},
-          {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "dy", name: "Dividend Yield", field: "dy" , sortable: true},
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
+          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 120},
+          {id: "pe", name: "P/E", field: "pe", sortable: true, width: 120},
+          {id: "ps", name: "P/S", field: "ps", sortable: true, width: 120},
+          {id: "dy", name: "Dividend Yield", field: "dy" , sortable: true, width: 120},
+          {id: "beta", name: "Beta", field: "beta", sortable: true, width: 120},
          ];
         }
         else{
           var columns = [
           {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
-          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
-          {id: "pe", name: "P/E", field: "pe", sortable: true},
-          {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
+          {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 100},
+          {id: "pe", name: "P/E", field: "pe", sortable: true, width: 100},
+          {id: "ps", name: "P/S", field: "ps", sortable: true, width: 100},
+          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true, width: 100 },
+          {id: "beta", name: "Beta", field: "beta", sortable: true, width: 100},
          ];
 
         }

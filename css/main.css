@@ -114,19 +114,14 @@ body {
 }
 
 #plot{
-
     background-color: white;
     border-radius: 3px;
     border: 1px solid #888;
     margin-left: 2em;
-
 }
 
 #stockInfo {
-
-
      margin-right: 0px;
-
      background-color: white;
      border-radius: 3px;
      border: 1px solid #888;
@@ -262,6 +257,10 @@ body {
 
 .clearfix {
     *zoom: 1;
+}
+
+.slick-header-column{
+  overflow: visible !important;
 }
 
 /* ==========================================================================
