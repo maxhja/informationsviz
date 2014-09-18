@@ -8,7 +8,8 @@
     $ticker = $id; 
     $url2 = '&d=1&e=26&f=2014&g=d&a=0&b=3&c=2000&ignore=.csv';
     $completeUrl = $url.$ticker.$url2;
-
+    
+    
    
     $path = 'hist/'.$id.'.csv';
     

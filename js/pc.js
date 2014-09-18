@@ -1,7 +1,9 @@
 function pc(){
-    
-   
- 
+
+
+  
+
+
 
     var self = this; // for internal d3 functions
 
@@ -27,7 +29,7 @@ function pc(){
         width = pcDiv.width() - margin[1] - margin[3],
         height = pcDiv.height() - margin[0] - margin[2];
 
-     
+
      var dimensionsOfStock  = ["Company Name","Exchange:Ticker","Industry Group","Bottom up Beta for sector","Bottom up levered beta","Market Cap (in US $)",
                             "Book Debt to capital ratio","Market Debt to capital ratio","Book Debt to Equity Ratio",
                             "Market Debt to Equity ratio",
@@ -44,21 +46,21 @@ function pc(){
                             "Average 10-year EBIT","Average 10-yr Net Income", "EBITDA", "Cash/ Firm Value", "Stock price (Dec 31, 2012)in US$",
                             "Net Profit Margin", "Pre-tax Operating Margin","Total Debt", "Cash",
                             "Return on Equity", "Trailing Revenues", "Size of Branch"]
-    
+
     //initialize tooltip
 
     d3.csv("data/svenska_aktier2.csv", function(data) {
-        
+
         means = meanOfbranch(data);
         data = data;
         self.data = data;
         self.means = means;
         var value = "mean";
-        loadData(value, data); 
-    
+        loadData(value, data);
 
-    });  
-     
+
+    });
+
 
     function loadData(value, sortedData) {
 
@@ -87,7 +89,7 @@ function pc(){
             .attr("height", height + margin[0] + margin[2])
             .append("svg:g")
             .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
-     
+
          //Load data med en Ny function som sedan ska anropas på "on click"
         if(value == "mean"){
 
@@ -98,8 +100,8 @@ function pc(){
         }
         else if("data"==value){
           // console.log(value);
-            
-            self.sortedData = sortedData;   
+
+            self.sortedData = sortedData;
             infoGrid1.addGrid(sortedData);
             console.log(self.sortedData);
             setScale(self.sortedData)
@@ -111,10 +113,10 @@ function pc(){
         }
 
         function setScale(data1){
-             
+
             x.domain(dimensions = d3.keys(data1[0]).filter(function(d) {
             return d !=  getDimension(d) && [(y[d] = d3.scale.linear() //Remove Country
-                .domain(d3.extent(data1, function(p) { 
+                .domain(d3.extent(data1, function(p) {
 
                     return +p[d]; }))
                 .range([height, 0]))];
@@ -135,12 +137,12 @@ function pc(){
                 else {
                     return d;
                 }
-                    
-            } 
+
+            }
     }
 
     function draw(value){
-     
+
         //adds all the stock
         cc = {};
         var color = d3.scale.category20c();
@@ -160,7 +162,7 @@ function pc(){
         else if(value=="data"){
             self.sortedData.forEach(function(d){
                     cc[d["Company Name"]] = color(d["Company Name"]);
-                   
+
             });
              setColorType = "Company Name";
              dataSet = self.sortedData;
@@ -169,7 +171,7 @@ function pc(){
         else{
             self.data.forEach(function(d){
                 cc[d["Company Name"]] = color(d["Company Name"]);
-                
+
             });
             dataSet = self.data;
             setColorType = "Industry Group";
@@ -184,9 +186,9 @@ function pc(){
             .attr("d", path)
             .style("stroke", function(p){
                 return color(p["Industry Group"]);
-     
+
             })
-            //add the data and append the path 
+            //add the data and append the path
             .on("mousemove", function(d){})
             .on("mouseout", function(){});
 
@@ -201,20 +203,20 @@ function pc(){
                 return (d["Size of Branch"]/5);
             })
             .style("stroke",function(p){
-                return color(p[setColorType]);   
+                return color(p[setColorType]);
             })
 
             .on("mouseout", function(d){
                 tooltip.transition()
                 .duration(500)
                 .style("opacity",0);
-             /*    if(d["Company Name"]!=null){ //get all company 
-                    
+             /*    if(d["Company Name"]!=null){ //get all company
+
                      addToGrid(self.data);
                  }
                  else{ //get all company within
                     var tempData = clone(self.data);
-                   // var sortedData = getCompany(d, tempData);     
+                   // var sortedData = getCompany(d, tempData);
                    // addToGrid(sortedData);
                  }
                    */
@@ -232,16 +234,16 @@ function pc(){
                 if(d["Company Name"]!=null){
                     var tempData = clone(self.means);
                     //sort after company name
-                    //var sortedData = getCompany(d, tempData);     
+                    //var sortedData = getCompany(d, tempData);
                    // addToGrid(sortedData);
 
 
                 }
-                else{ // sort grid after industry group 
+                else{ // sort grid after industry group
                 var tempData = clone(self.data);
-              
+
                  //get all objects within the industry group
-                 var sortedData = sortData(d, tempData);     
+                 var sortedData = sortData(d, tempData);
                //  addToGrid(sortedData);
                  }
 
@@ -255,10 +257,10 @@ function pc(){
 
                 //selFeature(d);
                 var tempData = clone(self.data);
-                var mean = "data";  
+                var mean = "data";
                 //get all objects within the industry group
-                var sortedData = sortData(d, tempData);  
-              
+                var sortedData = sortData(d, tempData);
+
                 addToGrid(sortedData);
                 loadData(mean, sortedData);
 
@@ -267,7 +269,7 @@ function pc(){
                var newRes =getHistoricalData(res);
 
                if(newRes ==1 || newRes ==0){
-                
+
                 infoPlot1.setFile(res);
                 infoPlot1.setTitle(d["Company Name"]);
 
@@ -285,7 +287,7 @@ function pc(){
             .enter().append("svg:g")
             .attr("class", "dimension")
             .attr("transform", function(d) { return "translate(" + x(d) + ")"; });
-            
+
         // Add an axis and title.
         g.append("svg:g")
             .attr("class", "axis")
@@ -310,13 +312,13 @@ function pc(){
         return line(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
 
     }
-   
+
 
     // Handles a brush event, toggling the display of foreground lines.
     function brush() {
 
         var selected = [];
-      
+
         var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
             extents = actives.map(function(p) { return y[p].brush.extent(); });
             foreground.style("display", function(d) {
@@ -329,28 +331,24 @@ function pc(){
         });
             addToGrid(selected);
 
-          //  path(selected);
-    
     }
 
 
-    //method for selecting the pololyne from other components	
+    //method for selecting the pololyne from other components
     this.selectLine = function(value){
-         
+
     };
 
     this.addToPc = function(value){
 
             addValueToPC(value);
-        
+
     }
 
 
 
     this.addToPCFromSearchBar = function(stocks){
-        
             loadData("data", stocks);
-      
     }
 
 
@@ -359,15 +357,13 @@ function pc(){
         console.log(value);
 
          var tempData = clone(self.data);
-         var mean = "data";  
+         var mean = "data";
          //get all objects within the industry group
-         var sortedData = sortData(value, tempData);       
+         var sortedData = sortData(value, tempData);
          addToGrid(sortedData);
          loadData(mean, sortedData);
- 
+
     }
 
-   
+
 }
-
-

@@ -3,184 +3,157 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/colorbrewer.css">
-        <link rel="stylesheet" href="css/main.css">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/colorbrewer.css">
+  <link rel="stylesheet" href="css/main.css">
 
-        <!--modules css-->
-        <link rel="stylesheet" href="css/pc.css">
-        <link rel="stylesheet" href="css/infoPlot.css">
+  <!--modules css-->
+  <link rel="stylesheet" href="css/pc.css">
+  <link rel="stylesheet" href="css/infoPlot.css">
 
+  <!--slickgrid css-->
+  <link rel="stylesheet" href="js/slickgrid/slick.grid.css" type="text/css"/>
+  <link rel="stylesheet" href="js/slickgrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
 
-        <!--slickgrid css-->
-        <link rel="stylesheet" href="js/slickgrid/slick.grid.css" type="text/css"/>
-        <link rel="stylesheet" href="js/slickgrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+  <style>
 
+    .slick-header-columns, .slick-headerrow-columns{
+      font-size: 14px;
+      height: 2em;
+    }
+    .grid-canvas{
+      font-size: 14px;
+    }
+    .ui-state-default{
+      width: 160px;!important
 
-
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Wrap all page content here -->
-        <div id="wrap">
-
-            <!-- Fixed navbar -->
-            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                   
-                    </div>
-                    <div class="navbar-collapse collapse">
-
-                        <ul class="nav navbar-nav">
-                          <li><a style="color:#2E9AFE; font-size: 130%;"href="index.html">STOCK VISUALIZATION</a></li>
-                          <li><a href="#openModal">About</a></li>
-                          <li><a href="index.html">Return</a></li>
-                        </ul>
-                        <form class="navbar-form navbar-right">
-                            <ul class="nav navbar-nav">
-                            <li><input type="text" id = "mySearch"  class="form-control"  placeholder="Stock..."></li>
-                            <li><input type="button" class="btn btn-primary" id = "myButton" value="search"></li>
-                            </ul>
-                        </form>
-                       <!--   <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Action</a></li>
-                              <li><a href="#">Another action</a></li>
-                              <li><a href="#">Something else here</a></li>
-                              <li class="divider"></li>
-                              <li class="dropdown-header">Nav header</li>
-                              <li><a href="#">Separated link</a></li>
-                              <li><a href="#">One more separated link</a></li>
-                            </ul>
-                          </li>-->
-                       
-                      
+    }
+  </style>
 
 
-                      
+</head>
+<body>
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
 
+  <!-- Wrap all page content here -->
+  <div id="wrap">
 
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a style="color:#2E9AFE; font-size: 130%;"href="index.html">STOCK VISUALIZATION</a></li>
+            <li><a href="#openModal">About</a></li>
+            <li><a href="index.html">Return</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <ul class="nav navbar-nav">
+              <li><input type="text" id = "mySearch"  class="form-control"  placeholder="Search for companies..."></li>
+              <li><input type="button" class="btn btn-primary" id = "myButton" value="search"></li>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </div>
 
-</div>
-                     <!--   <a class="navbar-brand" href="index.html">STOCK VISUALIZATION</a >
-                        <a href="index.html" class="btn btn-small"><i class="icon-white icon-arrow-left"></i> Return</a>
-                        <a href="#openModal" class="btn btn-small">Info</a>-->
-                  
-                </div>
+    <!-- Begin page content -->
+    <div class="container">
+      <div id="openModal" class="modalDialog">
+        <div>
+          <a href="#close" title="Close" class="close">X</a>
+          <h2>What is this?</h2>
+          <p>This is an interactive web-app for filtering out intresting stocks by using key ratio</p>
+          <h2>What is what?</h2>
+          <p>The box in the top left corner is a Index of all industry groups in sweden, click it if you want to see which companys who are in that group</p>
+          <p>The box in the top right corner shows the a stocks value over time </p>
+          <p>The box shows parallell coordinates of all industry groups in sweden. You can filter the Industry groups or Stocks by dragging them up and down.</p>
+          <h2>Explanation of key ratio</h2>
+          <p><bold>Beta</bold> <a href= http://www.investopedia.com/terms/p/price-to-salesratio.asp> A measure of the volatility, or systematic risk, of a security </a></p>
+          <bold><p> EV/EBIT
+            <a href= http://www.investopedia.com/terms/e/ebit-ev-multiple.asp> used to measure a company's return on investment</a></p></bold>
+            <bold><p>Current PE<a href= http://www.investopedia.com/terms/p/price-earningsratio.asp> Definition of 'Price-Earnings Ratio - P/E Ratio'</a></p></bold>
+            <bold><p>PS
+              <a href= http://www.investopedia.com/terms/p/price-to-salesratio.asp> Definition of 'Price-To-Sales Ratio - PSR'</a></p></bold>
+              <bold><p>EV/Invested Capital<a href= http://www.investopedia.com/terms/c/crogi.asp> Definition of 'Enterprice value / Invested capital'</a></p></bold>
+              <bold><p>Dividned Yield<a href= http://www.investopedia.com/terms/d/dividendyield.asp> shows how much a company pays out in dividends each year relative to its share price</a></p></bold>
             </div>
+          </div>
+          <!-- row of columns -->
+          <br><br>
 
+          <div class="row">
+            <div id="dvLoading"></div>
 
+            <br>
 
-            <!-- Begin page content -->
-
-            <div class="container">
-
-            <div id="openModal" class="modalDialog">
-                <div>
-                    <a href="#close" title="Close" class="close">X</a>
-                    <h2>What is this?</h2>
-                    <p>This is an interactive web-app for filtering out intresting stocks by using key ratio</p>
-                    <h2>What is what?</h2>
-                    <p>The box in the top left corner is a Index of all industry groups in sweden, click it if you want to see which companys who are in that group</p>
-                    <p>The box in the top right corner shows the a stocks value over time </p>
-                    <p>The box shows parallell coordinates of all industry groups in sweden. You can filter the Industry groups or Stocks by dragging them up and down.</p>
-                    <h2>Explanation of key ratio</h2>
-                    <p><bold>Beta</bold> <a href= http://www.investopedia.com/terms/p/price-to-salesratio.asp> A measure of the volatility, or systematic risk, of a security </a></p>
-                    <bold><p> EV/EBIT 
-                    <a href= http://www.investopedia.com/terms/e/ebit-ev-multiple.asp> used to measure a company's return on investment</a></p></bold>
-                    <bold><p>Current PE<a href= http://www.investopedia.com/terms/p/price-earningsratio.asp> Definition of 'Price-Earnings Ratio - P/E Ratio'</a></p></bold>
-                    <bold><p>PS
-                    <a href= http://www.investopedia.com/terms/p/price-to-salesratio.asp> Definition of 'Price-To-Sales Ratio - PSR'</a></p></bold>
-                    <bold><p>EV/Invested Capital<a href= http://www.investopedia.com/terms/c/crogi.asp> Definition of 'Enterprice value / Invested capital'</a></p></bold>
-                    <bold><p>Dividned Yield<a href= http://www.investopedia.com/terms/d/dividendyield.asp> shows how much a company pays out in dividends each year relative to its share price</a></p></bold>
-                </div>
+            <div class="col-12">
+              <div id="pc" style="height: 20em; width: 98.9%;">
+              </div>
             </div>
-
-
-
-                <!-- row of columns -->
-
-                <br><br>
-             
-                             <div class="row">
-             <div id="dvLoading"></div>
-
-                    <br>
-                   
-                    <div class="col-xs-12">
-                        <div id="pc" style="height: 40vh">
-                            
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div id="stockInfo" style="height: 60vh; font-size: 9px; width: 84vh">
-                        </div>
-                    </div>
-           
-                    <div class="col-xs-6">
-
-                        <div id="plot" style="height: 60vh; width: 89vh; clip-path: url(#clip)">
-
-
-                        </div>
-                     </div>
-                </div>
-              
-
+          </div>
+          <br>
+          <div class="row">
+              <div class="col-md-6">
+                <div id="stockInfo" style="height: 32.4em"></div>
+              </div>
+              <div class="col-md-6">
+                <div id="plot" style="margin-left: 0.2em; height: 32.4em; clip-path: url(#clip)">
+              </div>
             </div>
-
         </div>
 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="js/vendor/d3.min.js"></script>
-        <script src="js/vendor/topojson.v1.min.js"></script>
-        <script src="js/vendor/underscore-min.js"></script>
-        <script src="js/vendor/colorbrewer.js"></script>
-        <script src="js/vendor/colorbrewer.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js"></script>
+        </div>
 
-        <!--modules js-->
-        <script src="js/pc.js"></script> 
-        <script src="js/infoGrid.js"></script> 
-        <script src="js/infoPlot.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/meanOfbranch.js"></script>
-        <script src="js/functions.js"></script>
+      </div>
 
-        <!--slickGrid-->
-        <script src="js/slickgrid/lib/jquery.event.drag-2.2.js"></script>
-        <script src="js/slickgrid/slick.core.js"></script>
-        <script src="js/slickgrid/slick.grid.js"></script>
-        
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/plugins.js"></script>
+      <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+      <script src="js/vendor/d3.min.js"></script>
+      <script src="js/vendor/topojson.v1.min.js"></script>
+      <script src="js/vendor/underscore-min.js"></script>
+      <script src="js/vendor/colorbrewer.js"></script>
+      <script src="js/vendor/colorbrewer.js"></script>
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+
+      <!--modules js-->
+      <script src="js/pc.js"></script>
+      <script src="js/infoGrid.js"></script>
+      <script src="js/infoPlot.js"></script>
+      <script src="js/main.js"></script>
+      <script src="js/meanOfbranch.js"></script>
+      <script src="js/functions.js"></script>
+
+      <!--slickGrid-->
+      <script src="js/slickgrid/lib/jquery.event.drag-2.2.js"></script>
+      <script src="js/slickgrid/slick.core.js"></script>
+      <script src="js/slickgrid/slick.grid.js"></script>
+
 
     </body>
-</html>
+    </html>

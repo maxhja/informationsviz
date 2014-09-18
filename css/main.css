@@ -102,13 +102,13 @@ body {
     height: 100%;
      -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
-    background:#ece6d6 url(../img/bg-light.png) repeat;
+    background: rgba(237, 237, 238, 0.08);
     /* The html and body elements cannot have any padding or margin. */
 }
 
 #pc{
     background-color: white;
-    border-radius: 5px;
+    border-radius: 3px;
     border: 1px solid #888;
 
 }
@@ -116,17 +116,19 @@ body {
 #plot{
 
     background-color: white;
-    border-radius: 5px;
+    border-radius: 3px;
     border: 1px solid #888;
-    
+    margin-left: 2em;
+
 }
 
 #stockInfo {
 
 
      margin-right: 0px;
+
      background-color: white;
-     border-radius: 5px;
+     border-radius: 3px;
      border: 1px solid #888;
 
 }
@@ -432,9 +434,5 @@ body {
    left: 50%;
    top: 50%;
    margin: -25px 0 0 -25px;
-  
+
 }
-
-
-
-

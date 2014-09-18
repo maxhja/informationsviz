@@ -1,37 +1,35 @@
 function infoGrid() {
 
   var self = this; // for internal d3 functions
-  self.grid=null; 
- 
+  self.grid=null;
+
   //create the grid with slickgrid
- 
+
   var columns = [
-    
-    {id: "ig", name: "Industry Group", field: "ig", width: 180},
-    {id: "beta", name: "Beta", field: "beta"},
-    {id: "pe", name: "P/E", field: "pe"},
-    {id: "ps", name: "P/S", field: "ps"},
-    {id: "dy", name: "Dividend Yield", field: "dy", width: 140},
-    {id: "beta", name: "Beta", field: "beta"},
-    {id: "evin", name: "EV/Invested Capital", field: "evin"},
+
+    {id: "ig", name: "Industry Group", field: "ig", width: 160, resizable: true},
+    {id: "pe", name: "P/E", field: "pe", width: 350, minWidth: 120, resizable: true},
+    {id: "ps", name: "P/S", field: "ps", resizable: true},
+    {id: "dy", name: "Dividend Yield", field: "dy", resizable: true},
+    {id: "beta", name: "Beta", field: "beta", width: 160, resizable: true},
   ];
 
   var options = {
     enableCellNavigation: false,
     enableColumnReorder: false,
-    multiColumnSort: true
+    multiColumnSort: true,
   };
 
   $("#myButton").click(function(){
    var value= $("#mySearch").val();
    var dataPick = [];
    var arrayToPc =[];
-   
+
 
         d3.csv("data/svenska_aktier2.csv", function(data) {
          var counter = 0;
                  for (var i = 0; i < data.length; i++) {
-                 
+
                   var temp = data[i]["Company Name"];
                   var re = new RegExp(value,'gi');
                   var test = temp.match(re);
@@ -39,13 +37,11 @@ function infoGrid() {
                           dataPick[counter] = {
                               Stock: data[i]["Company Name"],
                               ig: data[i]["Industry Group"],
-                              beta: data[i]["Beta"],
                               pe: data[i]["Current PE"],
                               ps: data[i]["PS"],
                               dy: data[i]["Dividend Yield"],
                               beta: data[i]["Beta"],
-                              evin: data[i]["EV/Invested Capital"],
-                              Ticker: data[i]["Exchange:Ticker"],
+                              Ticker: data[i]["Exchange:Ticker"]
                             };
                             counter++;
                             arrayToPc.push(data[i]);
@@ -53,25 +49,25 @@ function infoGrid() {
                   }
 
                  pc1.addToPCFromSearchBar(arrayToPc);
-          
+
               var columns = [
-                  {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
-                  {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
-                  {id: "beta", name: "Beta", field: "beta", sortable: true},
-                  {id: "pe", name: "P/E", field: "pe", sortable: true},
+                  {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 180},
+                  {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 350},
+                  {id: "pe", name: "P/E", field: "pe", sortable: true, width: 100},
                   {id: "ps", name: "P/S", field: "ps", sortable: true},
-                  {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },  
-                  {id: "evin", name: "EV/Invested Capital", field: "evin", sortable: true},
+                  {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
+                  {id: "beta", name: "Beta", field: "beta", sortable: true},
+
                  ];
-               
+
               self.grid = new Slick.Grid("#stockInfo", dataPick, columns, options);
 
                   self.grid.onClick.subscribe(function(e, args) {
-        
+
                   if(dataPick[args.row]["Ticker"]!=null){
                       var res = parseTicker(dataPick[args.row]["Ticker"]);
                       var newRes =getHistoricalData(res);
-                      if(newRes ==1 || newRes ==0){    
+                      if(newRes ==1 || newRes ==0){
                             infoPlot1.setFile(res);
                             infoPlot1.setTitle(dataPick[args.row]["Company Name"]);
                       }
@@ -81,40 +77,36 @@ function infoGrid() {
                     }
                     else{
                       pc1.addToPc(dataPick[args.row]);
-                  
+
                     }
-                    
+
                 });
 
-           });  
+           });
 
-    
+
     });
-    
+
   this.addGrid = function(data){
-  
+
       if(data[0]["Company Name"]==null){
 
         var columns = [
           {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 100},
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
           {id: "pe", name: "P/E", field: "pe", sortable: true},
           {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "evin", name: "EV/Invested Capital", field: "evin", sortable: true},
           {id: "dy", name: "Dividend Yield", field: "dy" , sortable: true},
-          
+          {id: "beta", name: "Beta", field: "beta", sortable: true},
          ];
         }
         else{
           var columns = [
           {id: "Stock", name: "Company Name", field: "Stock", sortable: true, width: 100},
           {id: "ig", name: "Industry Group", field: "ig", sortable: true, width: 50},
-          {id: "beta", name: "Beta", field: "beta", sortable: true},
           {id: "pe", name: "P/E", field: "pe", sortable: true},
           {id: "ps", name: "P/S", field: "ps", sortable: true},
-          {id: "evin", name: "EV/Invested Capital", field: "evin", sortable: true},
-          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },      
-          
+          {id: "dy", name: "Dividend Yield", field: "dy", sortable: true },
+          {id: "beta", name: "Beta", field: "beta", sortable: true},
          ];
 
         }
@@ -129,14 +121,13 @@ function infoGrid() {
                 pe: data[i]["Current PE"],
                 ps: data[i]["PS"],
                 dy: data[i]["Dividend Yield"],
-                beta: data[i]["Beta"],
-                evin: data[i]["EV/Invested Capital"]
+                beta: data[i]["Beta"]
               };
           }
 
           self.grid = new Slick.Grid("#stockInfo", dataPicked, columns, options);
 
-          self.grid.onSort.subscribe(function (e, args) {  //sort the list.              
+          self.grid.onSort.subscribe(function (e, args) {  //sort the list.
               var cols = args.sortCols;
 
               dataPicked.sort(function (dataRow1, dataRow2) {
@@ -157,7 +148,7 @@ function infoGrid() {
 
           self.grid.onClick.subscribe(function(e, args) {
             if(data[args.row]["Exchange:Ticker"]!=null){ //ifall den har ett ticker namn innebär det att det handlar om aktier
-              console.log("pc OCNE");
+
               var res = parseTicker(data[args.row]["Exchange:Ticker"]);
               var newRes =getHistoricalData(res);
               if(newRes ==1 || newRes ==0){
@@ -171,11 +162,11 @@ function infoGrid() {
 
             }
             else{
-              
+
               pc1.addToPc(data[args.row]);
-            
+
             }
           });
     }
-     
+
 }
