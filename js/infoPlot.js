@@ -12,7 +12,7 @@ function infoPlot(){
 
     var ipDiv = $("#plot");
   
- var margin = {top: 10, right: 10, bottom: 200, left: 25},
+ var margin = {top: 10, right: 10, bottom: 20, left: 40},
     margin2 = {top: 200, right: 10, bottom: 20, left: 25},
     width = ipDiv.width() - margin.left - margin.right,
     height = ipDiv.height() - margin.top - margin.bottom,
@@ -56,7 +56,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
      y = d3.scale.linear().range([height, 0]);
 
-     y2 = d3.scale.linear().range([height, 0]);
+     y2 = d3.scale.linear().range([height2, 0]);
 
 brush = d3.svg.brush()
     .x(x2)
@@ -86,12 +86,12 @@ var brush = d3.svg.brush()
     .y0(height)
     .y1(function(d) { return y(d["Close"]); });
 
-     area2 = d3.svg.area()
+    /* area2 = d3.svg.area()
     .interpolate("monotone")
     .x(function(d) { return x2(d["Date"]); })
     .y0(height2)
     .y1(function(d) { return y2(d["Close"]); });
-
+*/
     line = d3.svg.line()
     .x(function(d) { return x2(d["Date"]); })
     .y(function(d) { return y2(d["Close"]); });
@@ -115,7 +115,7 @@ var svg = d3.select("#plot").append("svg")
 
     svg.append("defs").append("clipPath")
     .attr("id", "clip")
- 	.append("rect")
+ 	  .append("rect")
     .attr("width", width)
     .attr("height", height);
 
@@ -124,10 +124,11 @@ var svg = d3.select("#plot").append("svg")
     .attr("class", "focus")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+/*
     context = svg.append("g")
     .attr("class", "context")
     .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
-
+*/
 
 
   d3.csv(pathToFile, type, function(error, data) {
