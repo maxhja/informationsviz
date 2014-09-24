@@ -425,12 +425,12 @@ body {
 
 #dvLoading
 {
-   background:url(../img/gif-load.gif) no-repeat center center;
+   background:url(../img/ajax-loader.gif) no-repeat center center;
    height: 100px;
    width: 100px;
    position: fixed;
    z-index: 1000;
-   left: 50%;
+   left: 48%;
    top: 50%;
    margin: -25px 0 0 -25px;
 
